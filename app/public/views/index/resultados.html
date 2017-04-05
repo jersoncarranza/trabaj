@@ -1,0 +1,50 @@
+<style type="text/css">
+		.data {
+			height: 35px;
+			position: relative;
+			background-color: rgba(200, 200, 200, 0.1);
+			border-color: rgba(255,99,132,1);
+			margin-top: 1em;
+			border-radius: 5px; 
+
+			}
+
+		.data:hover {
+			height: 35px;
+			position: relative;
+			background-color: rgba(50, 50, 255, 0.2);
+			border-color: rgba(255,99,132,1);
+			}
+
+		.pro{
+			float: right;
+			position: relative;
+			}
+
+		.por{
+			height: 35px;
+			position: relative;
+			background-color: rgba(0, 0, 255, 0.2);
+			border-color: rgba(0, 0, 255, 0.4);
+			border-radius: 5px;
+			margin-top: -2em;
+		}
+		.l{
+			font-size: 0.5em
+		}
+
+		
+</style>
+
+
+<div class="section" ng-repeat="r in data">
+	<div class=" col-md-offset-4 col-sm-offset-4 col-xs-offset-2  data"  style=" width:250px;" >
+		<h4>	
+		{{ r.apellido}}
+		{{ r.nombre}}
+		<span class="l">(votos {{r.count}})</span>
+		<b class="pro">{{ r.promedio}}</b> 
+		</h4>
+	<div class="por" style="width:{{r.promedio * 25}}px;"> </div>
+	</div>
+</div>

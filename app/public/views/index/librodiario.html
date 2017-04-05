@@ -1,0 +1,64 @@
+<section class="container">
+	<div class="panel panel-default">
+    <div class="panel-heading"><b>Libro Diario</b></div>
+	<table class="table" id="table-libro">
+		<thead>
+			<tr>
+				<th>Nº</th>
+				<th>Fecha</th>
+				<th>Detalle</th>
+				<th>Debe</th>
+				<th>Haber</th>
+			</tr>
+		</thead>
+		<tbody ng-repeat="l in diario">
+			<tr>
+				<td></td>
+				<td>{{l.fecha}}</td>
+				<td><center>Nº {{$index + 1}}</center></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr ng-repeat="p in l.debe">
+				<td></td>
+				<td></td>
+				<td>{{p.detalle}} </td>
+				<td> {{p.cantidad}}</td>
+				<td></td>
+			</tr>
+			<tr ng-repeat="p in l.haber">
+				<td></td>
+				<td></td>
+				<td class="dHaber">
+					<span class="listo">______</span>{{p.detalle}}
+					
+				</td>
+				<td></td>
+				<td>
+					{{p.cantidad}}
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td><b>Por :{{l.descripcion}}</b></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+	<span class="btn" ng-click="descargar(diario)"><i class="glyphicon glyphicon-circle-arrow-down"></i></span>
+</section>
+
+
+<style type="text/css">
+	.dHaber{
+		margin-left: 2em;
+		padding-left: 2em;
+	}
+	.listo{
+		color:  rgb(255, 255, 255);
+	}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>

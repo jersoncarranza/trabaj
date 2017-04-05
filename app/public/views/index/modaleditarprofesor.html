@@ -1,0 +1,40 @@
+    <div  class="borde-login caja-rg">
+        <form name="form" role="form" enctype="multipart/form-data">
+        	<h2>Actualización de datos</h2>
+            <div class="col-sm-12 form-group" ng-class="{ 'has-error': form.cedula.$dirty && form.cedula.$error.required }">
+                <label  for="cedula">Cédula</label>
+                <input placeholder="cedula" type="text" name="cedula" id="cedula" class="form-control" ng-model="profesor.cedula" required />
+                <span ng-show="form.cedula.$dirty && form.cedula.$error.required" class="help-block">Cédula del profesor</span>
+            </div>
+            <div class="col-sm-12 form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+                <label  for="username">Nombres Completos</label>
+                <input placeholder="Nombre" type="text" name="name" id="name" class="form-control" ng-model="profesor.nombre" required />
+                <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Nombre del profesor</span>
+            </div>
+            <div class="col-sm-12 form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+                <label  for="username">Apellidos</label>
+                <input placeholder="Apellido" type="text" name="name" id="name" class="form-control" ng-model="profesor.apellido" required />
+                <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Apellido del profesor</span>
+            </div>
+            <div class="col-sm-12 form-group" ng-class="{ 'has-error': form.cargo.$dirty && form.cargo.$error.required }">
+                <label  for="cargo" >Cargo</label>
+                <select class="form-control" name="cargo" id="cargo" ng-model="profesor.cargo" required  ng-options="o as o for o in placement.options"></select>
+                <span ng-show="form.cargo.$dirty && form.cargo.$error.required" class="help-block">Cargo </span>
+            </div>
+
+       <!--      <div class="form-group" ng-class="{ 'has-error': form.imagen.$dirty && form.imagen.$error.required }">
+                <label  for="username">Url de la imagen:</label>
+                <input placeholder="Nombre" type="text" name="imagen" id="imagen" class="form-control" ng-model="NewPro.imagen" required />
+                <span ng-show="form.imagen.$dirty && form.imagen.$error.required" class="help-block">Url</span>
+            </div> -->
+
+            <div class="modal-footer">
+                <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary" ng-click="update(profesor)" >Actualizar</button>
+                <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                 <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+
+

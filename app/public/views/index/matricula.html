@@ -1,0 +1,28 @@
+<section class=" container">
+    <div class="panel panel-default">
+  <!-- Default panel contents -->
+    <div class="panel-heading">Matrícula</div>
+  <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Cédula</th>
+                    <th>Nombres y Apellidos</th>
+                    <th>Cursos</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="e in estudiante">
+                <tr>
+                    <td>{{e.cedula}}</td>
+                    <td>{{e.nombres}} {{e.apellido1}} {{e.apellido2}}</td>
+                    <td>♀ ♀ ♪ ► </td>
+                    <td>
+                         <span class="btn" ng-click="open(e)" ng-hide="formVisibility"><i class="glyphicon glyphicon-plus-sign icon-mas"></i></span> 
+                    </td>
+
+                </tr>    
+            </tbody>
+            
+        </table>
+    </div>
+</section>

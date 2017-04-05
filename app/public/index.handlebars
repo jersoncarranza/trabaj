@@ -1,0 +1,137 @@
+<!-- <link rel="stylesheet" type="text/css" href="./css/style2.css"> -->
+<head>
+	<link rel="stylesheet" href="./css/alertify.min.css"/>
+	<link rel="stylesheet" href="./css/stylebar.css" media="screen" charset="utf-8">
+	<link rel="icon" href="/icon/favicon.ico">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+</head>
+<body ng-app='App'>
+	
+	
+	<nav class="navbar navbar-default navbar-nc">
+		<div class="container-fluid">
+	
+		  <div class="navbar-header">
+		    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			<span class="sr-only">Barra de navegación</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		    </button>
+		    <a class="navbar-brand" href="/">Fundación Jaspe</a>
+		  </div>
+	
+		  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		   
+		  
+		    <ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+			  <a href="#/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.name}}<img class="img-circle" src="{{user.skin}}" width="25px"><span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+			    <li role="separator" class="divider"></li>
+			    <li><a href="/logout">Salir</a></li>
+			  </ul>
+			</li>
+		    </ul>
+		  </div>
+		</div>
+	</nav> 
+	 
+    <div class="container">
+	    <div id="sidebar">
+	        <ul>
+	           	<li><a href="#/curso">Cursos </a></li>
+				<li><a href="#/matricula">Matrícula</a></li>
+				<li><a href="#/profesor">Profesores</a></li>
+				<li><a href="#/estudiante">Estudiantes</a></li>
+				<li><a href="#/general">General</a></li>
+				<li>
+					<b>Contabilidad</b>
+				</li>
+					<ul>
+						<li><a href="#/situacioninicial">Estado Inicial</a></li>
+						<li><a href="#/diario">Libro Diario</a></li>
+						<li><a href="#/cuenta">Codigo de Cuentas</a></li>
+					</ul>
+	        </ul>
+	    </div>
+	    <div class="main-content">
+	    <div class="swipe-area"></div>
+	        <a data-toggle=".container" id="sidebar-toggle"  onclick="myFunction()" >
+	            <span class="bar"></span>
+	            <span class="bar"></span>
+	            <span class="bar"></span>
+	        </a>
+		    <div ng-view="" class="col-md-offset-2  col-md-6  col-xs-12  col-sm-9">
+			  	
+		    </div>
+	  
+	    </div>
+	</div>
+	       
+ 	
+
+	<script type="text/javascript">
+
+		function myFunction() {
+			document.getElementsByClassName("container")style.left = "-250px";
+			document.getElementsByClassName("open-sidebar")style.left = "-250px";
+		    //alert("dio click");
+		    /*
+
+				.container.open-sidebar {
+				    left: 240px;
+				}
+				 
+		    */
+		}	
+	</script>
+	
+
+    <script src="./js/src/jquery-2.0.3.min.js"></script>
+    <script src="./js/src/angular.min.js"></script> 
+    <script src="./js/src/angular-route.min.js"></script>
+    <script src="./js/src/angular-cookies.min.js"></script> 
+    <script src="./js/src/ui-bootstrap-2.0.0.min.js"></script> 
+    <script src="./js/src/ui-bootstrap-tpls.min.js"></script> 
+    <script src="./js/src/angular-animate.min.js"></script> 
+    <script src="./js/src/ui-grid.min.js"></script> 
+    <script src="./js/src/angular-pdf.min.js"></script> 
+   <!--  <script src="./js/src/ng-table.min.js"></script> 
+    <script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script>
+    -->
+    <script src="./js/index/app.js"></script>
+    <script src="./js/index/cursoCtrl.js"></script>
+    <script src="./js/index/cursoFactory.js"></script>
+    <script src="./js/index/estudianteCtrl.js"></script>
+    <script src="./js/index/generalCtrl.js"></script>
+    <script src="./js/index/librodiarioCtrl.js"></script>
+    <script src="./js/index/main.js"></script>
+    <script src="./js/index/matriculaCtrl.js"></script>
+    <script src="./js/index/ModalEditarCursoCtrl.js"></script>
+    <script src="./js/index/modalEditarProfesorCtrl.js"></script>
+    <script src="./js/index/ModalEditarEstudianteCtrl.js"></script>
+    <script src="./js/index/ModalEstudianteCtrl.js"></script>
+    <script src="./js/index/ModalMatriculaCtrl.js"></script>
+    <script src="./js/index/ModalProCtrl.js"></script>
+    <script src="./js/index/modalrolpagosctrl.js"></script>
+    <script src="./js/index/profesorCtrl.js"></script>
+    <script src="./js/index/resultados.js"></script>
+    <script src="./js/index/teacher-detail.js"></script>
+    <script src="./js/index/teacherdirective.js"></script>
+    <script src="./js/index/teacherFactory.js"></script>
+    <script src="./js/index/ModalNewCursoCtrl.js"></script>
+    <script src="./js/index/situacioninicialCtrl.js"></script>
+    <script src="./js/index/cuentaCtrl.js"></script>
+    <script src="./js/index/modalEditarCuentaCtrl.js"></script>
+    <script src="./js/index/ModalNuevoESICtrl.js"></script>
+  
+  
+
+	    <!-- JavaScript -->
+	<script src="./js/src/alertify.min.js"></script>
+	<script src="./js/src/jsplug.js"></script>
+
+	<!-- CSS -->
+</body>

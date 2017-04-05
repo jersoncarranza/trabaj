@@ -1,0 +1,32 @@
+<section class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">  
+        <span class="btn" ng-click="open()" ng-hide="formVisibility"><i class="glyphicon glyphicon-plus-sign icon-mas"></i></span>
+        Nómina Profesores
+        <span class="btn derecha" ng-click="refresh()"><i class="glyphicon glyphicon-refresh icon-mas"></i></span>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td><b>Cédula<b></td>
+                    <td><b>Nombre</b></td>
+                    <td><b>Rol de Pagos</b></td>
+                    <td><b>Modificar / Eliminar</b></td>
+                </tr>
+            </thead>
+            <tbody ng-repeat="p in profesor">
+                <tr id="{{p.id}}">
+                    <td ng-model="p.cedula">{{p.cedula}}</td>
+                    <td  ng-model="p.nombre">{{p.nombre}} {{p.apellido}}</td>
+                    <td>
+                        <button class="btn btn-primary" ng-click="openrol(p)"><span class="glyphicon glyphicon-list-alt"></span></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-success" ng-click="openedit(p)"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button class="btn btn-danger" ng-click="remove(p)"><span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+</section>

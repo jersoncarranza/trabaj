@@ -1,0 +1,47 @@
+<section class="container">
+    <div class="panel panel-default"> 
+     <div class="panel-heading"> <span class="btn" ng-click="opencurso()"><i class="glyphicon glyphicon-plus-sign icon-mas"></i></span>Cursos
+     <span class="btn derecha" ng-click="refresh()"><i class="glyphicon glyphicon-refresh icon-mas"></i></span> 
+    </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td><b>Nombre<b></td>
+                    <td><b>Descripción<b></td>
+                    <td><b>Imagen</b></td>
+                    <td><b>Editar / Eliminar</b></td>
+                </tr>
+            </thead>
+            <tbody ng-repeat="p in cursos">
+                <tr>                                                             
+                    <td  ng-model="p.nombre">{{p.nombre}}</td>
+                    <td  ng-model="p.descripcion">{{p.descripcion}}</td>
+                    <td > <img ng-src="/img/{{p._id}}.{{p.extension}}" alt="{{p.descripcion}}" height="40" width="40"></td>
+                    <td>
+                        <button class="btn btn-success" ng-click="open(p)"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button class="btn btn-danger" ng-click="remove(p)"><span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>     
+    </div>
+</section>
+
+<section>
+    <style>
+      .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+      }
+      .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+      }
+      .margin{
+        margin-top: 3em;
+      }
+  
+    </style>
+</section>

@@ -1,0 +1,160 @@
+<section class="container">
+    <div>
+    	<center>
+    	<h3>Fundación "JASPE"</h3>
+	    <h3>Estado de situación inicial</h3>
+	    <h3>Al 2 De Enero del 2017</h3>
+    	</center>
+    </div>
+    <div>
+    	
+   		<table class="space table table-hover col-sm-6">
+            <thead>
+                <tr>
+                    <th><b>ACTIVO</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <form name="form">
+                        <td class="col-md-5" ng-class="{'has-error': form.name.$dirty && form.name.$error.required}">
+                            <input placeholder="cuenta" type="text" name="name" id="name" class="form-control" ng-model="cuenta.nombre" onkeypress="return soloLetras(event)"  required />
+                        </td>
+                        <td class="col-md-5" ng-class="{ 'has-error': form.numero.$dirty && form.numero.$error.required }">
+                            <input placeholder="valor" type="number" name="numero" id="numero" class="form-control" ng-model="cuenta.valor" onkeypress="return soloNumeros(event)" required />
+                       </td>
+                       <td class="col-md-1">
+                            <button id="btn-activo" class="btn btn-link" type="button" ng-click="add()"><i class="glyphicon glyphicon-ok"></i></button>
+                       </td>
+                    </form>
+                </tr>    
+                <tr ng-repeat="n in activo">
+                    <div>   
+                        <td>{{n.cuenta}}</td> <td>{{n.cantidad}}</td>
+                    </div>
+                </tr>     
+            </tbody>
+        </table>
+        <table class="space table table-hover col-sm-6">
+            <thead>
+                <tr>
+                    <th><b>Pasivo</b></th>
+                </tr>
+            </thead>
+            <tbody>  
+                <tr>
+                    <form name="form2">
+                        <td class="col-md-5">
+                            <input placeholder="cuenta" type="text" name="namepas" id="namepas" class="form-control" ng-model="cuentapasivo.nombre" onkeypress="return soloLetras(event)"  required />
+                        </td>
+                        <td class="col-md-5">
+                            <input placeholder="valor" type="number" name="numeropas" id="numeropas" class="form-control" ng-model="cuentapasivo.valor" onkeypress="return soloNumeros(event)" required />
+                       </td>
+                       <td class="col-md-1">
+                            <button id="btn-activo" class="btn btn-link" type="button" ng-click="addpasivo()"><i class="glyphicon glyphicon-ok"></i></button>
+                       </td>
+                    </form>
+                </tr>    
+                <tr ng-repeat="n in pasivo">
+                    <td>{{n.cuenta}}</td><td>{{n.cantidad}}</td>
+                </tr>    
+                <tr>
+                    <td>Total Pasivos</td><td><b>${{sumapasivo}}</b></td>
+                </tr>    
+            </tbody>
+            
+            <thead>
+                <tr><th></th></tr>
+                <tr>
+                    <th><b>Patrimonio</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <form name="form3">
+                        <td class="col-md-5">
+                            <input placeholder="cuenta" type="text" name="namepat" id="namepat" class="form-control" ng-model="cuentapatrimonio.nombre" onkeypress="return soloLetras(event)"  required />
+                        </td>
+                        <td class="col-md-5">
+                            <input placeholder="valor" type="number" name="numeropat" id="numeropat" class="form-control" ng-model="cuentapatrimonio.valor" onkeypress="return soloNumeros(event)" required />
+                       </td>
+                       <td class="col-md-1">
+                            <button id="btn-activo" class="btn btn-link" type="button" ng-click="addpatrimonio()"><i class="glyphicon glyphicon-ok"></i></button>
+                       </td>
+                    </form>
+                </tr>     
+                <tr ng-repeat="n in patrimonio">
+                    <td>{{n.cuenta}}</td><td>${{n.cantidad}}</td>
+                </tr>    
+                <tr><td>Total Patrimonio</td><td>${{sumapatrimonio}}</td></tr>    
+            </tbody>
+        </table>
+    </div>
+    <div>
+    	<table class="space col-sm-6">
+    		<thead> <tr> <th>Total de activos <b> $ {{suma}}</b> </th></tr></thead>
+    	</table>
+    	<table class="space col-sm-6 ">
+    		<thead> <tr> <th><b>T Patrimonio + T Pasivo</b> ${{sumapatrimonio + sumapasivo}}</th></tr></thead>
+    	</table>
+    </div>
+</section>
+    <div id="color"></div>
+<div class="modal-footer">
+        <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary" ng-click="guardar()" >Guardar</button>
+        <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+         <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+</div>
+
+<script>
+    function soloLetras(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+       especiales = "8-37-39-46";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+
+    }
+
+    function soloNumeros(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       numeros = "0123456789.";
+       especiales = "8-37-39-46";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(numeros.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+    }
+</script>
+<style type="text/css">
+    .input{
+        border-color: white;
+        background-color: white;
+    }
+
+    #color{
+        border-bottom:solid; 
+        border-color: blue;
+       
+    }
+</style>

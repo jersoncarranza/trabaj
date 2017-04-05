@@ -1,0 +1,52 @@
+ <section  class="borde-login caja-rg">
+
+        <form name="form" class="" role="form" enctype="multipart/form-data">
+            <h2>Editar curso</h2>
+            <div class="form-group col-md-8" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+                <label  for="name">Nombre del curso</label>
+                <input placeholder="Nombre del curso" type="text" name="name" id="name" class="form-control" ng-model="curso.nombre" required />
+                <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Nombre del curso</span>
+            </div>
+            <div class="form-group col-md-4 input-group input-group" ng-class="{ 'has-error': form.precio.$dirty && form.precio.$error.required }">
+                <label  for="precio">Precio del curso</label>
+                <div class="input-group input-group-sm">
+                    <input type="number" class="form-control" name="precio" id="precio" ng-model="curso.precio" placeholder="Precio" aria-describedby="sizing-addon3" required>
+                    <span class="input-group-addon" id="sizing-addon3">$</span>
+                </div>
+                <span ng-show="form.precio.$dirty && form.precio.$error.required" class="help-block">Ponga el precio ejemplo: 25</span>
+            </div>
+
+             <div class="form-group" ng-class="{ 'has-error': form.name2.$dirty && form.name2.$error.required }">
+                <label  for="name2">Descripción del curso</label>
+                <textarea placeholder="Descripción" name="name2" id="name2" class="form-control" ng-model="curso.descripcion" required /></textarea>
+                <span ng-show="form.name2.$dirty && form.name2.$error.required" class="help-block">Descripción del curso</span>
+            </div>
+            <div class="form-group">
+                    <label >Fecha de inicio del curso</label>
+                    <p class="input-group">
+                      <input type="text" class="form-control" uib-datepicker-popup="{{format}}" name="dt" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" alt-input-formats="altInputFormats" required/>
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </p>
+                <span ng-show="form.dt.$dirty && form.dt.$error.required" class="help-block">Escoja una fecha de inicio</span>
+            </div>
+
+            <div class="form-group">
+                <label  for="file">Seleccione una imagen</label>
+                <input  type="file" name="file" id="file" class="form-control" ng-model="file" uploader-model="file" />
+            </div>
+        
+
+
+            <div class="modal-footer">
+                <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary" ng-click="Edit()" >Guardar</button>
+                <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                 <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+            </div>
+            <div>
+                ...
+            </div>
+        
+        </form>
+</section>

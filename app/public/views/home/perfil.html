@@ -1,0 +1,46 @@
+
+<section class="container ">
+	<br>
+	<div>
+	<p>{{datos.nombres}} {{datos.apellido1}} {{datos.apellido2}} estos son los cursos que has elegido:
+	</p>
+	</div>
+  	<div class="panel panel-default"> 
+    <div class="panel-heading"> Cursos prematriculado </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td><b>Nombre del curso<b></td>
+                    <td><b>Quitar</b></td>
+                </tr>
+            </thead>
+            <tbody ng-repeat="c in datos2.curso">
+                <tr>                                                             
+                    <td  ng-model="p.nombre">{{c.nombre_curso}}</td>
+                    <td>
+                        <button class="btn btn-danger" ng-click="remove(c, datos)"><span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>     
+    </div>
+    <br><br>
+    <div class="panel-heading"> Cursos matriculado </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td><b>Nombre del curso<b></td>
+                 
+                </tr>
+            </thead>
+            <tbody ng-repeat="d in datos3.curso2">
+                <tr>                                                             
+                    <td >{{d.nombre_curso}}</td>
+               
+                </tr>
+            </tbody>
+        </table>     
+    </div>
+</section>
+
+

@@ -1,0 +1,90 @@
+
+<div  class="col-sm-12 col-md-8 borde-login caja-rg">
+    <!-- <form name="form" ng-submit="Save()"> -->
+    <form name="form">
+        <div class="form-group col-md-12" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+            <label  for="name">Nombre del nuevo curso</label>
+            <input placeholder="Curso" type="text" name="name" id="name" class="form-control" ng-model="curso.nombre" required />
+            <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Escriba un nombre al curso</span>
+        </div>
+        <div class="form-group col-md-12" ng-class="{ 'has-error': form.descripcion.$dirty && form.descripcion.$error.required }">
+            <label  for="descripcion">Descripción</label>
+            <textarea placeholder="Descripción" class="form-control" rows="3" name="descripcion" id="descripcion" ng-model="curso.descripcion" required></textarea>
+            <span ng-show="form.descripcion.$dirty && form.descripcion.$error.required" class="help-block">Escriba una breve descripción</span>
+        </div>
+
+        <!-- <div class="form-group col-md-12" ng-class="{ 'has-error': form.descripcion.$dirty && form.descripcion.$error.required }">
+            <label  for="descripcion">Descripción</label>
+            <input placeholder="Descripción" name="descripcion" id="descripcion" class="form-control" ng-model="curso.descripcion" required />
+            <span ng-show="form.descripcion.$dirty && form.descripcion.$error.required" class="help-block">Escriba una breve descripción</span>
+        </div> -->
+
+        <div class="form-group col-md-6">
+            <div >
+                <label >Fecha de inicio del curso</label>
+                    <p class="input-group">
+                      <input type="text" class="form-control" uib-datepicker-popup="{{format}}" name="dt" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" alt-input-formats="altInputFormats" required/>
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </p>
+            </div>
+            <span ng-show="form.dt.$dirty && form.dt.$error.required" class="help-block">Escoja una fecha de inicio</span>
+        </div>
+
+        <div class="form-group col-md-6" ng-class="{ 'has-error': form.file.$dirty && form.file.$error.required }">
+            <label  for="imagen">Seleccione una imagen para el curso</label>
+            <input type="file" ng-model="file" name="file" id="file" class="form-control" uploader-model="file" required >
+        </div>
+
+        <div class="form-group col-md-12">
+            <button class="btn btn-lg btn-primary col-md-offset-1 col-md-4" type="button" ng-click="Save()" ng-disabled="form.$invalid || vm.dataLoading">Guardar</button>
+            <button class="btn btn-lg btn-warning col-md-offset- col-md-4" type="button" ng-click="cancel()" ng-disabled="">Cancelar</button>
+            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+
+    </form>
+</div>
+<section>
+    <style>
+      .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+      }
+      .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+      }
+    </style>
+</section>
+
+<section class="col-sm-12 col-md-offset-2 col-md-8">
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td><b>Nombre<b></td>
+                        <td><b>Descripción</b></td>
+                        <td><b>Imagen</b></td>
+                        <td><b>Editar/Eliminar</b></td>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="p in cursos">
+                    <tr>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                        <td  ng-model="p.nombre">{{p.nombre}}</td>
+                        <td  ng-model="p.descripcion">{{p.descripcion}}</td>
+                        <td > <img ng-src="/img/{{p._id}}.{{p.extension}}" alt="{{p.descripcion}}" height="40" width="40"></td>
+                        <td>
+                            <button class="btn btn-success" ng-click="open(p)"><span class="glyphicon glyphicon-pencil"></span></button>
+                            <button class="btn btn-danger" ng-click="remove(p)"><span class="glyphicon glyphicon-remove"></span></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>     
+        </div>
+    </div>
+</section>
+

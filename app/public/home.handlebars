@@ -1,0 +1,148 @@
+  <head>
+    <link rel="stylesheet" href="./css/alertify.min.css"/>
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css">
+    <link rel="stylesheet" href="./css/botonsocial.css"/>
+    <link rel="icon" href="/icon/favicon.ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head> 
+<!--     <link rel="stylesheet" type="text/css" href="css/style.css">
+     -->    
+<body ng-app='AppHome'>
+    
+    <!-- Header -->
+    <header id="header">
+            <h1><a href="#/">Fundación</a> JASPE</h1>
+            <nav id="nav" >
+                 <ul>
+                    <li><a href="#/">Inicio</a></li>
+                    <li><a href="#/cursos">Cursos</a></li>
+                    <li><a href="#/somos">Quienes somos</a></li>
+                    <li >
+                        <a id="perfil"  href="#/perfil" class="icon fa-angle-down">Perfil</a>
+                        <ul>
+                            <li><a href="#/perfil/datos">Mi Perfil</a></li>
+                            <li><button type="submit" class="btn btn-link" onclick="miFuncion()" >Salir</button></li>
+                            <li id="salir"><a href="#/">Salir</a></li>
+                          <!--   <li>
+                              <a href="#">Submenu</a>
+                              <ul>
+                                  <li><a href="#">Option One</a></li>
+                                  <li><a href="#">Option Two</a></li>
+                                  <li><a href="#">Option Three</a></li>
+                                  <li><a href="#">Option Four</a></li>
+                              </ul>
+                          </li> -->
+                        </ul>
+                    </li>
+                <!-- <li><a href="#" class="button">Sign Up</a></li> -->
+                </ul>
+            </nav>
+    </header>
+    <section>
+        <div  class=" col-sm-12" ng-view=""></div>
+        <div class="caja-redes">
+            <center>
+                <h5>Visítanos a nuestras redes sociales</h5>
+            </center>
+            <br>
+           <a href="#/" class="icon-button linkedin"><i class="icon-linkedin"></i><span></span></a>
+           <a href="#/" class="icon-button twitter"><i class="icon-twitter"></i><span></span></a>
+           <a href="#/" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a>
+           <a href="#/" class="icon-button google-plus"><i class="icon-google-plus"></i><span></span></a>
+        </div>
+    </section>
+    
+ 
+
+    <footer class="col-sm-12 container-fluid">
+        <center>
+            <p>Dirección: Via Guayaquil km 3, Cajabamba-Ecuador | Teléfono: 593(03) 2998-200 | Telefax: (03)2317-001 | Código Postal: EC060155</p> 
+        </center>
+    </footer>
+ 
+    <script src="./js/src/jquery.min.js"></script> 
+    <script src="./js/src/angular.min.js"></script> 
+    <script src="./js/src/angular-route.min.js"></script>
+    <script src="./js/src/angular-cookies.min.js"></script> 
+    <script src="./js/src/ui-bootstrap-2.0.0.min.js"></script> 
+    <script src="./js/src/ui-bootstrap-tpls.min.js"></script> 
+    <script src="./js/src/angular-animate.min.js"></script> 
+    <script src="./js/src/ui-grid.min.js"></script> 
+
+    <script src="./js/home/app.js"></script>
+    <script src="./js/home/indexCtrl.js"></script>
+    <script src="./js/home/somosCtrl.js"></script>
+    <script src="./js/home/cursosCtrl.js"></script>
+    <script src="./js/home/cursoDirective.js"></script>
+    <script src="./js/home/cursoFactory.js"></script>
+    <script src="./js/home/cursodetailCtrl.js"></script>
+    <script src="./js/home/estudiante2Ctrl.js"></script>
+    <script src="./js/home/estudianteCtrl.js"></script>
+    <script src="./js/home/estudiante2Ctrl.js"></script>
+    <script src="./js/home/perfilCtrl.js"></script>
+    <script src="./js/home/datosCtrl.js"></script>
+    <script src="./js/src/alertify.min.js"></script>
+    <script src="./js/src/bootstrap.min.js"></script>
+       <script type="text/javascript">
+        function miFuncion(){
+            localStorage.removeItem('estudiante');
+            localStorage.removeItem('cedula_estudiante');
+            localStorage.removeItem('contrasena_estudiante');
+            localStorage.removeItem('nombres_estudiante');
+            localStorage.removeItem('apellido1_estudiantºe');
+            localStorage.removeItem('apellido2_estudiante');
+            localStorage.removeItem('sexo_estudiante');
+
+            div = document.getElementById('perfil');
+            div.style.display = 'none';
+
+            window.location.href = "#/";
+
+        }
+
+        function btn_perfil() {
+
+            var ban = localStorage.getItem("estudiante");
+           // console.log("ban", ban);
+            if (ban === null) {
+                div = document.getElementById('perfil');
+                div.style.display = 'none';
+
+                div2 = document.getElementById('salir');
+                div2.style.display = 'none'; 
+            }else{
+                div = document.getElementById('perfil');
+                div.style.display = 'block';
+
+
+                div2 = document.getElementById('salir');
+                div2.style.display = 'block'; 
+            }   
+        }
+
+        btn_perfil();
+    </script>
+
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.dropotron.min.js"></script>
+    <script src="assets/js/jquery.scrollgress.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="assets/js/main.js"></script>
+    
+    <style type="text/css">
+        .bloque{
+            height: 3em;
+            width: 3em;
+            display: block;
+        }
+    </style>
+
+    </body>
+ 

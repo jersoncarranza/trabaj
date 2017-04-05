@@ -1,0 +1,197 @@
+<style type="text/css">
+		
+		#container_register{
+			display: none;
+		}
+		.funkyradio div {
+		  clear: both;
+		  overflow: hidden;
+		}
+
+		.funkyradio label {
+		  width: 100%;
+		  border-radius: 3px;
+		  border: 1px solid #D1D3D4;
+		  font-weight: normal;
+		}
+
+		.funkyradio input[type="radio"]:empty,
+		.funkyradio input[type="checkbox"]:empty {
+		  display: none;
+		}
+
+		.funkyradio input[type="radio"]:empty ~ label,
+		.funkyradio input[type="checkbox"]:empty ~ label {
+		  position: relative;
+		  line-height: 2.5em;
+		  text-indent: 3.25em;
+		  margin-top: 2em;
+		  cursor: pointer;
+		  -webkit-user-select: none;
+		     -moz-user-select: none;
+		      -ms-user-select: none;
+		          user-select: none;
+		}
+
+		.funkyradio input[type="radio"]:empty ~ label:before,
+		.funkyradio input[type="checkbox"]:empty ~ label:before {
+		  position: absolute;
+		  display: block;
+		  top: 0;
+		  bottom: 0;
+		  left: 0;
+		  content: '';
+		  width: 2.5em;
+		  background: #D1D3D4;
+		  border-radius: 3px 0 0 3px;
+		}
+
+		.funkyradio input[type="radio"]:hover:not(:checked) ~ label,
+		.funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
+		  color: #888;
+		}
+
+		.funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
+		.funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
+		  content: '\2714';
+		  text-indent: .9em;
+		  color: #C2C2C2;
+		}
+
+		.funkyradio input[type="radio"]:checked ~ label,
+		.funkyradio input[type="checkbox"]:checked ~ label {
+		  color: #777;
+		}
+
+		.funkyradio input[type="radio"]:checked ~ label:before,
+		.funkyradio input[type="checkbox"]:checked ~ label:before {
+		  content: '\2714';
+		  text-indent: .9em;
+		  color: #333;
+		  background-color: #ccc;
+		}
+
+		.funkyradio input[type="radio"]:focus ~ label:before,
+		.funkyradio input[type="checkbox"]:focus ~ label:before {
+		  box-shadow: 0 0 0 3px #999;
+		}
+
+		.funkyradio-default input[type="radio"]:checked ~ label:before,
+		.funkyradio-default input[type="checkbox"]:checked ~ label:before {
+		  color: #333;
+		  background-color: #ccc;
+		}
+
+		.funkyradio-primary input[type="radio"]:checked ~ label:before,
+		.funkyradio-primary input[type="checkbox"]:checked ~ label:before {
+		  color: #fff;
+		  background-color: #337ab7;
+		}
+
+		.funkyradio-success input[type="radio"]:checked ~ label:before,
+		.funkyradio-success input[type="checkbox"]:checked ~ label:before {
+		  color: #fff;
+		  background-color: #5cb85c;
+		}
+
+		.funkyradio-danger input[type="radio"]:checked ~ label:before,
+		.funkyradio-danger input[type="checkbox"]:checked ~ label:before {
+		  color: #fff;
+		  background-color: #d9534f;
+		}
+
+		.funkyradio-warning input[type="radio"]:checked ~ label:before,
+		.funkyradio-warning input[type="checkbox"]:checked ~ label:before {
+		  color: #fff;
+		  background-color: #f0ad4e;
+		}
+
+		.funkyradio-info input[type="radio"]:checked ~ label:before,
+		.funkyradio-info input[type="checkbox"]:checked ~ label:before {
+		  color: #fff;
+		  background-color: #5bc0de;
+		}
+</style> 
+<p>
+<section class="col-sm-12" id="container_login">
+	<form name="form1" role="form" enctype="multipart/form-data">
+		<h2>Iniciar sesión</h2>
+		<div class="col-sm-12 form-group" ng-class="{ 'has-error': form.cedula.$dirty && form.cedula.$error.required }">
+                <input placeholder="Cédula" type="text" name="cedula_a" id="cedula_a" class="form-control" ng-model="estudiante2.cedula2" required />
+                <span ng-show="form.cedula.$dirty && form.cedula.$error.required" class="help-block">Escriba su cédula</span>
+        </div>
+        <div class="col-sm-12 form-group" ng-class="{ 'has-error': form.contrasena2.$dirty && form.contrasena2.$error.required }">
+                <input placeholder="Contraseña" type="password" name="contrasena_a" id="contrasena_a" class="form-control" ng-model="estudiante2.contrasena2" required />
+                <span ng-show="form.contrasena2.$dirty && form.contrasena2.$error.required" class="help-block">Contraseña</span>
+        </div>
+        <div class="col-sm-12 modal-footer">
+                <button type="submit" ng-disabled="form1.$invalid || vm.dataLoading" class="btn btn-primary col-sm-12" ng-click="Login()" >Entrar</button>
+                <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+               
+        </div>
+        <div class="col-sm-12">
+        	<span>No tienes cuenta da click
+        	<button type="button" class="btn btn-link" ng-click="visible()" > Aquí </button>
+        	</span>
+        </div>
+	</form>
+</section>
+<section clr.module('AppHome')
+  .controller('estudianteCtrl',['$scope','$http', '$uibModalInstance', '$log', function ($scope,$http, $uibModalInstance, $log) {
+
+	ass="col-sm-12" id="container_register">
+	<form name="form" role="form" enctype="multipart/form-data">
+		<h2>Regístrate</h2>
+		<div class="col-sm-12 form-group" ng-class="{ 'has-error': form.cedula.$dirty && form.cedula.$error.required }">
+                <label  for="cedula">Cédula</label>
+                <input placeholder="Ejemplo: 0634567890" type="text" name="cedula" id="cedula" class="form-control" ng-model="estudiante.cedula" required />
+                <span ng-show="form.cedula.$dirty && form.cedula.$error.required" class="help-block">Cédula ejemplo: 0634567890</span>
+        </div>
+        <div class="col-sm-12 form-group" ng-class="{ 'has-error': form.contrasena_r.$dirty && form.contrasena_r.$error.required }">
+                <label  for="contrasena">Contraseña</label>
+                <input placeholder="Contraseña" type="password" name="contrasena_r" id="contrasena_r" class="form-control" ng-model="estudiante.contrasena_r" required />
+                <span ng-show="form.contrasena_r.$dirty && form.contrasena_r.$error.required" class="help-block">Contraseña</span>
+        </div>
+        <div class="col-sm-12 form-group" ng-class="{ 'has-error': form.nombres.$dirty && form.nombres.$error.required }">
+                <label  for="nombres">Nombres Completos</label>
+                <input placeholder="Nombres Completos" type="text" name="nombres" id="nombres" class="form-control" ng-model="estudiante.nombres" required />
+                <span ng-show="form.nombres.$dirty && form.nombres.$error.required" class="help-block">Nombres Completos</span>
+        </div>
+        <div class="col-sm-12 form-group" ng-class="{ 'has-error': form.apellido1.$dirty && form.apellido1.$error.required }">
+                <label  for="apellido1">Apellido Paterno</label>
+                <input placeholder="Apellido Paterno" type="text" name="apellido1" id="apellido1" class="form-control" ng-model="estudiante.apellido1" required />
+                <span ng-show="form.apellido1.$dirty && form.apellido1.$error.required" class="help-block">Apellido Paterno</span>
+        </div>
+        <div class="col-sm-12 form-group" ng-class="{ 'has-error': form.apellido2.$dirty && form.apellido2.$error.required }">
+                <label  for="apellido2">Apellido Materno</label>
+                <input placeholder="Apellido Materno" type="text" name="apellido2" id="apellido2" class="form-control" ng-model="estudiante.apellido2" required />
+                <span ng-show="form.apellido2.$dirty && form.apellido2.$error.required" class="help-block">Apellido Materno</span>
+        </div>
+        <div class="col-sm-12 form-group" ng-class="{ 'has-error': form.sexo.$dirty && form.sexo.$error.required }">
+        	<div class="funkyradio">
+		        <div class="funkyradio-primary col-sm-6">
+		            <input type="radio" name="radio" id="radio2" checked/>
+		            <label for="radio2">Mujer</label>
+		        </div>
+		        <div class="funkyradio-success col-sm-6">
+		            <input type="radio" name="radio" id="radio3" checked/>
+		            <label for="radio3">Hombre</label>
+		        </div>  
+		    </div>		
+		
+        </div>
+		<div class="modal-footer">
+                <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="col-sm-12 btn btn-primary" ng-click="Register()" >Regístrarse</button>
+                <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+
+        <div class="col-sm-12">
+        	<span>Ya tienes cuenta da click
+        	<button type="button" class="btn btn-link" ng-click="visible2()"> Aquí </button>
+        	</span>
+        </div>
+        
+	</form>
+</section>
+.
+</p>

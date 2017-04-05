@@ -1,0 +1,81 @@
+
+<section>
+		
+		<br>
+		<br>
+		<b class="col-sm-9">Fundación Jaspe</b>
+		<div class="col-sm-3">No: 003</div>
+		<br>
+		<br>
+		<div class="col-sm-6">ROL DE PAGOS INDIVIDUAL </div>
+		<div class="col-sm-6">MES DE : MAYO del 2016 </div>
+		<br>
+		<br>
+		<section>
+			<div class="col-sm-6">Empleado: <b> {{profesor.nombre}} {{profesor.apellido}}</b></div>
+			<div class="col-sm-6"></b></div>
+			<br>
+			<div class="col-sm-6">Cargo: <b> {{profesor.cargo}}</b></div>
+			<div class="col-sm-6"></div>
+		</section>
+		<br>
+		<br>
+		<section  class="line">
+			<div class="col-sm-6" ><b>Ingresos</b></div>
+			<div class="col-sm-6" ><b>Descuentos</b></div>
+			<br><br>
+			<div class="col-sm-3" >Sueldo básico</div>
+			<div class="col-sm-3" >$ 340</div>
+			<div class="col-sm-4" >Aporte IESS</div>
+			<div class="col-sm-2" >$ 41</div>
+			<br>
+			<div class="col-sm-3" >Horas Extras</div>
+			<div class="col-sm-3" >$ 0</div>
+			<div class="col-sm-4" >Préstamos quirografarios IESS</div>
+			<div class="col-sm-2" >$ 0</div>
+			<br>
+			<div class="col-sm-3" >Comisiones</div>
+			<div class="col-sm-3" >$100</div>
+			<div class="col-sm-4" >Préstamos y anticipos empresa</div>
+			<div class="col-sm-2" >$ 0</div>
+		</section>
+
+		<br>
+		<br>
+		<section class="line">
+			
+			<div class="col-sm-3" >Total Ingresos</div>
+			<div class="col-sm-3" >$440</div>
+			<div class="col-sm-4" >Total Descuentos</div>
+			<div class="col-sm-2" >$ 0</div>
+		</section>
+		<br>
+		<br>
+		<section class="line">
+			<div class="col-sm-9" ><b> Neto a pagar</b></div>
+			<div class="col-sm-3" > <b> $398.86 </b></div>
+		</section>
+		<br>
+		<br>
+		<div class="col-sm-4 col-sm-offset-4" >__________________</div>
+		<div class="col-sm-4" ></div>
+		<div class="col-sm-4 col-sm-offset-4" >Recibi conforme</div>
+		<div class="col-sm-4" ></div>
+		<br>
+		<br>
+		<div class="col-sm-4 col-sm-offset-4" >C.I.  {{profesor.cedula}} </div>
+
+		<br><br>
+
+		 <button class="btn btn-primary col-sm-4 col-sm-offset-4" type="button" ng-click="">Imprimir</button>
+	
+</section>
+
+<style type="text/css">
+	.line{
+		border-bottom-style: 2px solid;
+		border-top-style: solid;
+		border-color: black;
+	}
+
+</style>

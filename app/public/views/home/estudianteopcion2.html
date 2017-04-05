@@ -1,0 +1,56 @@
+
+<style type="text/css">
+    .b1 {
+        border-style: solid;
+        border-width: 2px;
+        border-color: black;
+        border-radius: 10px;
+    }
+    .mrg{
+        padding-left: 2em;
+        margin-left: 2em;
+    }
+    .b-cbx{
+        border-color: white;
+        border:white;
+    }
+    .demo{
+        margin-top: -10em;
+    }
+    .bd{ /*margen del*/
+
+        margin-top: 1em;
+        border-style: solid;
+        border-width: 2px;
+        border-color: black;
+        border-radius: 10px;
+    }
+    #btn-minus{
+    	display: none;
+    }
+    .logo{
+        margin-left: 25em;
+        margin-top: -8em;
+    }
+</style>
+
+<section class="col-sm-12">
+    <center>
+              
+        <h2>Fundación "Jaspe"</h2><br>
+    <div>
+        <img class="bd logo" ng-src="../img/logo.jpg" height="40" witdh="40">
+    </div>
+    </center>
+</section>
+<section class="datos col-md-12">
+    <div class="col-md-12">
+        <p>¿ <b id="nombre">{{estudiante}}</b>  deseas inscribirse en <b id="curso">{{nombre}}</b>? Su precio es de <b id="precio">{{precio}}</b>$</p>
+    </div>
+    <div class="modal-footer">
+                <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary" ng-click="si()" >Si</button>
+                <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                 <button class="btn btn-warning" type="button" ng-click="no()">No</button>
+        </div>
+</section>  
+.

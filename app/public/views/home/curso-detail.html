@@ -1,0 +1,8 @@
+<section class="container">
+	<h2>{{curso.nombre}}</h2>
+	<p class="col-lg-9 col-md-8 col-sm-6 col-xs-12">Este curso comenzará el diá {{curso.fecha_inicio}}, su precio es de {{curso.precio}}$ <br> {{curso.descripcion}}</p>
+
+	<img class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-src="/img/{{curso._id}}.{{curso.extension}}" width="20">	 
+    <br>
+    <button ng-click="open(curso)" class="btn btn-primary">Inscribirse</button>
+</section>
