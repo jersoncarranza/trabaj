@@ -31,7 +31,8 @@ exports.actualizarTeacher = function (id , data, callback) {
 		cedula : data.cedula,
 		apellido:data.apellido,
 		nombre : data.nombre,
-		cargo  : data.cargo
+		cargo  : data.cargo,
+		sueldo : data.sueldo
 	};
 
 	models.Teacher.update(query, {$set:campos}, callback);
@@ -72,7 +73,8 @@ exports.FindOneUser = function (id, callback) {
 		apellido:1,
 		nombre:1,
 		cedula:1,
-		cargo:1		
+		cargo:1,
+		sueldo:1	
 	};
 	models.Teacher.findOne(query, campos , callback);
 };
@@ -84,7 +86,8 @@ exports.FindOneUserCedula= function (cedula, callback) {
 		apellido:1,
 		nombre:1,
 		cedula:1,
-		cargo:1		
+		cargo:1,
+		sueldo:1
 	};
 	models.Teacher.findOne(query, campos , callback);
 };

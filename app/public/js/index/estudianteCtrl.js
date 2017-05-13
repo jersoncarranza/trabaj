@@ -29,9 +29,7 @@ angular.module('App')
     	});
 	};
 
-	$scope.mycurso = function (argument) {
-		console.log("Heyy");
-	}
+
 
  
 
@@ -48,7 +46,20 @@ angular.module('App')
 		}
 	}
 	
-
+	$scope.reporte = function () {
+		var curso = $scope.myColor;
+		console.log(curso.id);
+		if (curso.id != 0) {
+			 $http.get('/estudiante/reportes/' + curso.id ).success(function (data) {
+			 	location.href = '/estudiante/reportes/' + curso.id;
+			 });
+		}else{
+			$http.get('/estudiante/reportes/').success(function (data) {
+			 	location.href = '/estudiante/reportes/';
+			 });
+		}
+	}
+	
 		//listar estudiante
 	function GetAllEstudiante() {
 	        $http.get('/estudiante/list').success(function (data, status, headers, config) {

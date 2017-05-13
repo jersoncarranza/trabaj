@@ -1,0 +1,102 @@
+
+<section class="container">
+	
+	<div class="panel panel-default">
+	<div class="panel-heading"> Libro Mayor <b>cuenta</b> :
+    <select name="cargo" id="cargo" ng-model="myColor" required  ng-options="color.name for color in colors" ng-change="updatelist()"></select>
+    
+    </div>
+    </div>
+	<section class="col-xs-12">
+		<br>
+		
+			<p class="der-tit"> Cuenta :	<b> {{myColor.name | uppercase}}</b></p>
+			<p class="der-tit">Código : {{myColor.codigocuenta}}</p>
+		<table class="col-xs-12">
+	        <thead>
+	            <tr>
+	                <th><b>Debe</b></th>
+	                <th class="derecha"><b>Haber</b></th>
+	            </tr>
+	        </thead>
+	    </table>
+	
+		
+		<table class="col-xs-5">
+		<div class="div-border-horizontal"></div> 
+	        <thead>
+	            <tr>
+	                <th><b>Fecha</b></th>
+	                <th><b>Cantidad</b></th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr ng-repeat="c in debe">
+	                <td>{{c.fecha}}</td><td > $ {{c.cantidad}}</td>
+	            </tr>   
+	        </tbody>
+	    </table>
+		<div class="col-xs-1 div-border-vertical"></div>
+	    <table class="col-xs-5">
+	        <thead>
+	            <tr>
+	                <th><b>Fecha</b></th>
+	                <th><b>Cantidad</b></th>
+	            </tr>
+	        </thead>
+	        <tbody>    
+	            <tr ng-repeat="c in haber">
+	                <td>{{c.fecha}}</td><td>$ {{c.cantidad}}</td>
+	            </tr>  
+	          
+	        </tbody>
+	    </table>
+	</section>
+
+	<section class="col-xs-12">
+		<table class="col-xs-5">
+	        <thead>
+	            <tr>
+	                <th><b>Total</b></th>
+	                <th><b>$ {{sumadebe}}</b></th>
+	            </tr>
+	        </thead>
+	    </table>
+	    <div class="col-xs-1"></div>
+	    <table class="col-xs-5">
+	        <thead>
+	            <tr>
+	                <th><b>Total</b></th>
+	                <th><b>$ {{sumahaber}}</b></th>
+	            </tr>
+	        </thead>
+	    </table>
+	   	<br>
+	   	<br>
+	    <div class="col-xs-offset-3">{{concepto}} {{saldo}}</div>
+	</section>
+	
+</section>
+
+<style type="text/css">
+	.div-border-vertical { 
+		border-left: 3px solid #196c96; 
+		width:3px; 
+		height:200px; 
+	} 
+
+	.div-border-horizontal { 
+		border: 1px solid #196c96; 
+		height:1px; 
+		width:80%; 
+		margin-top: 2em;
+	} 
+
+	.derecha{
+		padding-left: 60%;
+	}
+
+	.der-tit{
+		padding-left: auto 0;
+	}
+</style>

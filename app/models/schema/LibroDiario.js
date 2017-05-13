@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 // http://enrique-asuntoscontables.blogspot.com/2011/09/clasificacion-general-de-las-cuentas.html
 var LibroDiarioSchema = mongoose.Schema({
 	fecha:{type: Date, default: Date.now },
+	prioridad:{type:Number},
+	esi:{type: String},
 	descripcion:{type: String},
 	debe:[{
 		codigo_cuenta:{type: String },//Estandar 

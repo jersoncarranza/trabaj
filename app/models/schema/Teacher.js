@@ -9,6 +9,7 @@ var TeacherSchema = mongoose.Schema({
 	apellido:{type: String },
 	comentarios:{type:String},
 	estado:{type:Number},
+	sueldo:{type:Number, default: 0}
 	//prevotos:{type:Number, default: 0},
 	//imagen:{type:String, default:"./img/user.png"},
 	/*calificacion:[{

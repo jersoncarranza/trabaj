@@ -1,8 +1,9 @@
  'use strict';
 angular.module('App')
-  .controller('ModalNuevoESICtrl', [ '$scope','$http', '$uibModalInstance', function ($scope,$http, $uibModalInstance) {
+  .controller('ModalNuevoESICtrl', [ '$scope','$http', '$uibModalInstance', '$rootScope', '$uibModal', function ($scope,$http, $uibModalInstance, $rootScope, $uibModal) {
     var existecuenta=-1;
     var bandera = -1;
+    var cuenta = [];
     $scope.activo = [];
     $scope.pasivo = [];
     $scope.patrimonio = [];
@@ -29,12 +30,14 @@ angular.module('App')
         $scope.cuentapatrimonio = "";
         document.getElementById("name").value = "";
         document.getElementById("numero").value = "";
+        document.getElementById("namepas").value = "";
+        document.getElementById("numeropas").value = "";
         existecuenta=-1;
         bandera = -1;
     }
 
     function validarInsertar (cuenta) {
-        $http.get('http://jaspe.herokuapp.com/cuenta/list').success(function (datos) {
+        $http.get('/cuenta/list').success(function (datos) {
             $scope.datos = datos;
             if (datos != null) {
 
@@ -45,7 +48,8 @@ angular.module('App')
                         if ($scope.activo.length == 0) {
                              $scope.activo.push({
                                 cuenta:cuenta.nombre.toLowerCase(),
-                                cantidad:cuenta.valor
+                                cantidad:cuenta.valor,
+                                codigoCuenta:datos[i].codigocuenta
                             });
                            
                         }else{
@@ -61,7 +65,8 @@ angular.module('App')
                           if (bandera != 1) {
                                  $scope.activo.push({
                                     cuenta:cuenta.nombre.toLowerCase(),
-                                    cantidad:cuenta.valor
+                                    cantidad:cuenta.valor,
+                                    codigoCuenta:datos[i].codigocuenta
                                 });
                             }
 
@@ -71,12 +76,13 @@ angular.module('App')
 
                 if (existecuenta == -1) {
                     alertify.error("No existe esa cuenta, no se inserto");
+                
                 }else{
                     if (bandera == 1 ) {
                         alertify.error("Esta cuenta ya esta en el Estado de Situación Inicial ");
                     }else{
                         alertify.success("Ingreso con exito");
-                        sumarcapital();
+                        sumarActivo();
                         resetear();
                     }
                 }
@@ -87,7 +93,7 @@ angular.module('App')
         });
     };
 
-    function sumarcapital() {
+    function sumarActivo() {
         var sumaTotalCapital = 0;
         for (var i = 0; i < $scope.activo.length; i++) {
             sumaTotalCapital = sumaTotalCapital + $scope.activo[i].cantidad;
@@ -113,7 +119,7 @@ angular.module('App')
     }
 
     function validarInsertarPasivo (cuenta) {
-        $http.get('http://jaspe.herokuapp.com/cuenta/list').success(function (datos) {
+        $http.get('/cuenta/list').success(function (datos) {
             $scope.datos = datos;
             if (datos != null) {
 
@@ -124,7 +130,8 @@ angular.module('App')
                         if ($scope.pasivo.length == 0) {
                              $scope.pasivo.push({
                                 cuenta:cuenta.nombre.toLowerCase(),
-                                cantidad:cuenta.valor
+                                cantidad:cuenta.valor,
+                                codigoCuenta:datos[i].codigocuenta
                             });
                            
                         }else{
@@ -140,7 +147,8 @@ angular.module('App')
                           if (bandera != 1) {
                                  $scope.pasivo.push({
                                     cuenta:cuenta.nombre.toLowerCase(),
-                                    cantidad:cuenta.valor
+                                    cantidad:cuenta.valor,
+                                    codigoCuenta:datos[i].codigocuenta
                                 });
                             }
 
@@ -191,7 +199,7 @@ angular.module('App')
     };
 
     function validarInsertarPatrimonio (cuenta) {
-        $http.get('http://jaspe.herokuapp.com/cuenta/list').success(function (datos) {
+        $http.get('/cuenta/list').success(function (datos) {
             $scope.datos = datos;
             if (datos != null) {
 
@@ -203,7 +211,8 @@ angular.module('App')
                         if ($scope.patrimonio.length == 0) {
                             $scope.patrimonio.push({
                                 cuenta:cuenta.nombre.toLowerCase(),
-                                cantidad:cuenta.valor
+                                cantidad:cuenta.valor,
+                                codigoCuenta:datos[i].codigocuenta
                             });
                            
                         }else{
@@ -219,7 +228,8 @@ angular.module('App')
                           if (bandera != 1) {
                                 $scope.patrimonio.push({
                                     cuenta:cuenta.nombre.toLowerCase(),
-                                    cantidad:cuenta.valor
+                                    cantidad:cuenta.valor,
+                                    codigoCuenta:datos[i].codigocuenta
                                 });
                             }
 
@@ -267,11 +277,362 @@ angular.module('App')
     $scope.guardar = function () {
         var aux = $scope.sumapatrimonio + $scope.sumapasivo;
          if ((aux) == $scope.suma) {
-            console.log("$scope.activo",$scope.activo);
-            console.log("$scope.pasivo",$scope.pasivo);
-            console.log("$scope.patrimonio",$scope.patrimonio);
+
+                var json = {
+                    activo:$scope.activo,
+                    pasivo:$scope.pasivo,
+                    patrimonio:$scope.patrimonio
+                }  
+
+                $http.post('contabilidad/situacioninicial/add' , json ).success(function (datos) {
+                    $scope.res = datos;
+                    if (datos.estado == 0) {
+                        alertify.success("Se guardó correctamente");
+                        $uibModalInstance.close();
+                    }else{
+                        alertify.error("Error del servidor", datos.mensaje);
+                    }
+                });
+               
+
         }else{
             alertify.error("Algo esta mal revise");
         }
     };
+
+    $scope.cancel = function () {
+        $uibModalInstance.close();
+    };
+
+
+    $scope.insertarCuenta = function () {
+ 
+        var modalInstance = $uibModal.open({
+        animation: $scope.animationsEnabled,
+        ariaLabelledBy: 'modal-title',
+        ariaDescribedBy: 'modal-body',
+        templateUrl: 'views/index/modalopenCuenta.html',
+        controller: "modalopenCuentaCtrl",
+        size: "sm",
+        });
+
+        modalInstance.result.then(function () { 
+            getCuentas();
+        });
+    };
+
+    //remover capital
+    $scope.removeAct = function (item) {
+        var index = $scope.activo.indexOf(item);
+        $scope.activo.splice(item, 1);
+        sumarActivo();
+    };
+    $scope.removePas = function (item) {
+        var index = $scope.pasivo.indexOf(item);
+        $scope.pasivo.splice(item, 1);
+        sumarPasivo();
+    };
+    $scope.removePat = function (item) {
+        var index = $scope.patrimonio.indexOf(item);
+        $scope.patrimonio.splice(item, 1);
+        sumarPatrimonio();
+    };
+
+
+    //=======================Autocompletar Activo================
+    getCuentas();
+    function getCuentas() {
+        $http.get('/cuenta/list').success(function (data) {
+            $scope.cursos = data;
+        for (var i = 0; i < $scope.cursos.length; i++) {
+            cuenta.push($scope.cursos[i].nombrecuenta)
+        }
+      });
+    };
+
+    $rootScope.searchItems =  cuenta;
+        
+    
+    //Sort Array
+    $rootScope.searchItems.sort();
+    //Define Suggestions List
+    $rootScope.suggestions = [];
+    //Define Selected Suggestion Item
+    $rootScope.selectedIndex = -1;
+    
+    //Function To Call On ng-change
+    $rootScope.search = function(){
+        $rootScope.suggestions = [];
+        var myMaxSuggestionListLength = 0;
+        for(var i=0; i<$rootScope.searchItems.length; i++){
+            var searchItemsSmallLetters = angular.lowercase($rootScope.searchItems[i]);
+            var searchTextSmallLetters = angular.lowercase($scope.cuenta.nombre);
+            if( searchItemsSmallLetters.indexOf(searchTextSmallLetters) !== -1){
+                $rootScope.suggestions.push(searchItemsSmallLetters);
+                myMaxSuggestionListLength += 1;
+                if(myMaxSuggestionListLength === 5){
+                    break;
+                }
+            }
+        }
+    };
+    
+    //Keep Track Of Search Text Value During The Selection From The Suggestions List  
+    $rootScope.$watch('selectedIndex',function(val){
+        if(val !== -1) {
+            $scope.cuenta.nombre = $rootScope.suggestions[$rootScope.selectedIndex];
+        }
+    });
+    
+    
+    //Text Field Events
+    //Function To Call on ng-keydown
+    $rootScope.checkKeyDown = function(event){
+        if(event.keyCode === 40){//down key, increment selectedIndex
+            event.preventDefault();
+            if($rootScope.selectedIndex+1 < $rootScope.suggestions.length){
+                $rootScope.selectedIndex++;
+            }else{
+                $rootScope.selectedIndex = 0;
+            }
+        }else if(event.keyCode === 38){ //up key, decrement selectedIndex
+            event.preventDefault();
+            if($rootScope.selectedIndex-1 >= 0){
+                $rootScope.selectedIndex--;
+            }else{
+                $rootScope.selectedIndex = $rootScope.suggestions.length-1;
+            }
+        }else if(event.keyCode === 13){ //enter key, empty suggestions array
+            event.preventDefault();
+            $rootScope.suggestions = [];
+            $rootScope.selectedIndex = -1;
+        }else if(event.keyCode === 27){ //ESC key, empty suggestions array
+            event.preventDefault();
+            $rootScope.suggestions = [];
+            $rootScope.selectedIndex = -1;
+        }else{
+            $rootScope.search();    
+        }
+    };
+    
+    //ClickOutSide
+    var exclude1 = document.getElementById('textFiled');
+    $rootScope.hideMenu = function($event){
+        $rootScope.search();
+        //make a condition for every object you wat to exclude
+        if($event.target !== exclude1) {
+            $rootScope.suggestions = [];
+            $rootScope.selectedIndex = -1;
+        }
+    };
+    //======================================
+    
+    //Function To Call on ng-keyup
+    $rootScope.checkKeyUp = function(event){ 
+        if(event.keyCode !== 8 || event.keyCode !== 46){//delete or backspace
+            if($scope.cuenta.nombre === ""){
+                $rootScope.suggestions = [];
+                $rootScope.selectedIndex = -1;
+            }
+        }
+    };
+    //======================================
+    
+    //List Item Events
+    //Function To Call on ng-click
+    $rootScope.AssignValueAndHide = function(index){
+         $scope.cuenta.nombre = $rootScope.suggestions[index];
+         $rootScope.suggestions=[];
+         $rootScope.selectedIndex = -1;
+    };
+    //======================================
+    //============================Autocompletar Pasivo==============
+
+    //Define suggestions2 List
+    $rootScope.suggestions2 = [];
+    //Define Selected Suggestion Item
+    $rootScope.selectedIndex2 = -1;
+    
+    //Function To Call On ng-change
+    $rootScope.search2 = function(){
+        $rootScope.suggestions2 = []
+        var myMaxSuggestionListLength = 0;
+        for(var i=0; i<$rootScope.searchItems.length; i++){
+            var searchItemsSmallLetters = angular.lowercase($rootScope.searchItems[i]);
+            var searchTextSmallLetters = angular.lowercase($scope.cuentapasivo.nombre);
+            if( searchItemsSmallLetters.indexOf(searchTextSmallLetters) !== -1){
+                $rootScope.suggestions2.push(searchItemsSmallLetters);
+                myMaxSuggestionListLength += 1;
+                if(myMaxSuggestionListLength === 5){
+                    break;
+                }
+            }
+        }
+    };
+    
+    //Keep Track Of Search Text Value During The Selection From The suggestions2 List  
+    $rootScope.$watch('selectedIndex2',function(val){
+        if(val !== -1) {
+            $scope.cuentapasivo.nombre = $rootScope.suggestions2[$rootScope.selectedIndex2];
+        }
+    });
+    
+    
+    //Text Field Events
+    //Function To Call on ng-keydown
+    $rootScope.checkKeyDown2 = function(event){
+        if(event.keyCode === 40){//down key, increment selectedIndex2
+            event.preventDefault();
+            if($rootScope.selectedIndex2+1 < $rootScope.suggestions2.length){
+                $rootScope.selectedIndex2++;
+            }else{
+                $rootScope.selectedIndex2 = 0;
+            }
+        }else if(event.keyCode === 38){ //up key, decrement selectedIndex2
+            event.preventDefault();
+            if($rootScope.selectedIndex2-1 >= 0){
+                $rootScope.selectedIndex2--;
+            }else{
+                $rootScope.selectedIndex2 = $rootScope.suggestions2.length-1;
+            }
+        }else if(event.keyCode === 13){ //enter key, empty suggestions2 array
+            event.preventDefault();
+            $rootScope.suggestions2 = [];
+            $rootScope.selectedIndex2 = -1;
+        }else if(event.keyCode === 27){ //ESC key, empty suggestions2 array
+            event.preventDefault();
+            $rootScope.suggestions2 = [];
+            $rootScope.selectedIndex2 = -1;
+        }else{
+            $rootScope.search2();    
+        }
+    };
+    
+    //ClickOutSide
+    var exclude1 = document.getElementById('numero');
+    $rootScope.hideMenu = function($event){
+        $rootScope.search2();
+        //make a condition for every object you wat to exclude
+        if($event.target !== exclude1) {
+            $rootScope.suggestions2 = [];
+            $rootScope.selectedIndex2 = -1;
+        }
+    };
+    //======================================
+    
+    //Function To Call on ng-keyup
+    $rootScope.checkKeyUp2 = function(event){ 
+        if(event.keyCode !== 8 || event.keyCode !== 46){//delete or backspace
+            if($scope.cuentapasivo.nombre === ""){
+                $rootScope.suggestions2 = [];
+                $rootScope.selectedIndex2 = -1;
+            }
+        }
+    };
+    //======================================
+    
+    //List Item Events
+    //Function To Call on ng-click
+    $rootScope.AssignValueAndHide2 = function(index){
+         $scope.cuentapasivo.nombre = $rootScope.suggestions2[index];
+         $rootScope.suggestions2=[];
+         $rootScope.selectedIndex2 = -1;
+    };
+    //======================================
+
+       //============================Autocompletar Patrimonio==============
+
+    //Define suggestions3 List
+    $rootScope.suggestions3 = [];
+    //Define Selected Suggestion Item
+    $rootScope.selectedIndex3 = -1;
+    
+    //Function To Call On ng-change
+    $rootScope.search3 = function(){
+        $rootScope.suggestions3 = []
+        var myMaxSuggestionListLength = 0;
+        for(var i=0; i<$rootScope.searchItems.length; i++){
+            var searchItemsSmallLetters = angular.lowercase($rootScope.searchItems[i]);
+            var searchTextSmallLetters = angular.lowercase($scope.cuentapatrimonio.nombre);
+            if( searchItemsSmallLetters.indexOf(searchTextSmallLetters) !== -1){
+                $rootScope.suggestions3.push(searchItemsSmallLetters);
+                myMaxSuggestionListLength += 1;
+                if(myMaxSuggestionListLength === 5){
+                    break;
+                }
+            }
+        }
+    };
+    
+    //Keep Track Of Search Text Value During The Selection From The suggestions3 List  
+    $rootScope.$watch('selectedIndex3',function(val){
+        if(val !== -1) {
+            $scope.cuentapatrimonio.nombre = $rootScope.suggestions3[$rootScope.selectedIndex3];
+        }
+    });
+    
+    
+    //Text Field Events
+    //Function To Call on ng-keydown
+    $rootScope.checkKeyDown3 = function(event){
+        if(event.keyCode === 40){//down key, increment selectedIndex3
+            event.preventDefault();
+            if($rootScope.selectedIndex3+1 < $rootScope.suggestions3.length){
+                $rootScope.selectedIndex3++;
+            }else{
+                $rootScope.selectedIndex3 = 0;
+            }
+        }else if(event.keyCode === 38){ //up key, decrement selectedIndex3
+            event.preventDefault();
+            if($rootScope.selectedIndex3-1 >= 0){
+                $rootScope.selectedIndex3--;
+            }else{
+                $rootScope.selectedIndex3 = $rootScope.suggestions3.length-1;
+            }
+        }else if(event.keyCode === 13){ //enter key, empty suggestions3 array
+            event.preventDefault();
+            $rootScope.suggestions3 = [];
+            $rootScope.selectedIndex3 = -1;
+        }else if(event.keyCode === 27){ //ESC key, empty suggestions3 array
+            event.preventDefault();
+            $rootScope.suggestions3 = [];
+            $rootScope.selectedIndex3 = -1;
+        }else{
+            $rootScope.search3();    
+        }
+    };
+    
+    //ClickOutSide
+    var exclude1 = document.getElementById('numero');
+    $rootScope.hideMenu = function($event){
+        $rootScope.search3();
+        //make a condition for every object you wat to exclude
+        if($event.target !== exclude1) {
+            $rootScope.suggestions3 = [];
+            $rootScope.selectedIndex3 = -1;
+        }
+    };
+    //======================================
+    
+    //Function To Call on ng-keyup
+    $rootScope.checkKeyUp3 = function(event){ 
+        if(event.keyCode !== 8 || event.keyCode !== 46){//delete or backspace
+            if($scope.cuentapatrimonio.nombre === ""){
+                $rootScope.suggestions3 = [];
+                $rootScope.selectedIndex3 = -1;
+            }
+        }
+    };
+    //======================================
+    
+    //List Item Events
+    //Function To Call on ng-click
+    $rootScope.AssignValueAndHide3 = function(index){
+         $scope.cuentapatrimonio.nombre = $rootScope.suggestions3[index];
+         $rootScope.suggestions3=[];
+         $rootScope.selectedIndex3 = -1;
+    };
+    //======================================
+
+
 }]);

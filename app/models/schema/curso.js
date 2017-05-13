@@ -8,7 +8,9 @@ var CursoSchema = mongoose.Schema({
 	descripcion:{type: String },
 	extension:{type: String },
 	fecha_inicio:{type:Date},
-	precio:{type:Number}
+	precio:{type:Number},
+	pension:{type:Number},
+	meses:{type:Number}
 
 });
 

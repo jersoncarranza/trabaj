@@ -10,6 +10,9 @@ var env = process.env.NODE_ENV || 'development',
 	 matricula = require('./routes/route_matricula.js');
 	 contabilidad = require('./routes/route_contabilidad.js');
 	 cuenta = require('./routes/route_cuenta.js');
+	 material = require('./routes/route_material.js');
+	 //arriendo = require('./routes/route_arriendo.js');
+
 
 	 express    = require('express'),
 	 exphbs		= require('express-handlebars'),
@@ -94,7 +97,9 @@ var env = process.env.NODE_ENV || 'development',
 		this.expressServer.use('/', estudiante); 
 		this.expressServer.use('/', matricula); 
 		this.expressServer.use('/', contabilidad); 
-		this.expressServer.use('/', cuenta); 
+		this.expressServer.use('/', cuenta);
+		this.expressServer.use('/', material);
+		//this.expressServer.use('/', arriendo);
 		};
 
 	module.exports = ExpressServer;

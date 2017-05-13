@@ -2,15 +2,17 @@ var express = require('express');
 var router = express.Router();
 var cuentaController = require('../controllers/cuenta_controller.js');
 
-//guardar un curso
+//guardar cuenta
 router.post('/cuenta/register', cuentaController.new);	
-//obtener todos los cursos
+//obtener todos las cuenta
 router.get('/cuenta/list', cuentaController.getall);	
-//listar un  curso
+//listar un  cuenta
 router.get('/cuenta/list/:id', cuentaController.getid);	
-//editar curso
+//listar un  cuenta
+//router.get('/cuenta/listipo/:id', cuentaController.getalltipo);	
+//editar cuenta
 router.put('/cuenta/editar/:id', cuentaController.editar);
-//eliminar
+//eliminar cuenta
 router.delete('/cuenta/eliminar/:id', cuentaController.eliminar);
 
 

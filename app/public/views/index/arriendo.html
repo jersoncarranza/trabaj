@@ -1,0 +1,29 @@
+<section class="container">
+    <div class="panel panel-default"> 
+     <div class="panel-heading"> <span class="btn" ng-click="arriendoRegistrar()"><i class="glyphicon glyphicon-plus-sign icon-mas"></i></span>Arriendo
+     <span class="btn derecha" ng-click="refresh()"><i class="glyphicon glyphicon-refresh icon-mas"></i></span> 
+    </div>
+        <table class="table table-hover col-sm-9">
+            <thead>
+                <tr>
+                    <td><b>Fecha que canceló<b></td>
+                    <td><b>Mes que pago<b></td>
+                    <td class="derecha"><b>Cantidad<b></td>
+             
+                </tr>
+            </thead>
+            <tbody >
+                <tr ng-repeat="a in arriendo">                                           
+                    <td class="col-sm-4">{{a.fecha}}</td>
+                    <td class="col-sm-4"><p>{{a.meses}} {{a.anio}}</p> </td>
+                    <td class="col-sm-4 derecha">${{a.cantidad}}<td>
+                </tr>
+            </tbody>
+        </table>     
+    </div>
+</section>
+<style type="text/css">
+    .derecha{
+        text-align: right;
+    }
+</style>

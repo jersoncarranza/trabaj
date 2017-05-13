@@ -22,4 +22,20 @@ router.put('/estudiante/removecurso/:id', estudianteController.removecurso);
 router.put('/estudiante/removecursoadmin/:id', estudianteController.removecursoadmin); 
 //listar estudiante por cursos
 router.get('/estudiante/listcursos/:curso', estudianteController.listcursosestudiantes);
+//listar con id
+router.get('/estudiante/reportes/:curso', estudianteController.reportesestudiantes);
+//listar son id
+router.get('/estudiante/reportes/', estudianteController.reportesestudiantes2);
+//listar estudiates con prematrícula
+router.get('/estudiates/prematricula/', estudianteController.estudiateprematricula);
+//pensiones
+
+router.get('/pensiones/materia/',estudianteController.materia);
+
+//pagos pensiones
+router.get('/pensiones/materiapagos/:id',estudianteController.materiapagos);
+//pago pensiones
+router.post('/pensiones/materiapagos/',estudianteController.pagos);
+
+
 module.exports = router;

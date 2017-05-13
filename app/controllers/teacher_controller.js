@@ -13,7 +13,7 @@ exports.new = function (req, res, next) {
 					if (!err) {
 						data_res={
 							estado:0,
-							mensaje: "correctamente ingresado"
+							listId: "correctamente ingresado"
 						}
 						res.json(data_res);
 					}else{
@@ -35,6 +35,22 @@ exports.new = function (req, res, next) {
 	});
 };
 
+//===========Cédula profesores
+exports.FindOneUserCedula = function (req, res, next) {
+	var cedula = req.params.cedula;
+	var data_res;
+	TeacherQuery.FindOneUserCedula(cedula, function (err, doc) {
+		if (!err) {
+			res.json(doc);
+		}else{
+			data_res={
+				estado:2,
+				mensaje: "Error"
+			}
+			res.json(data_res);
+		}
+	});
+};
 //listar todos profesores
 exports.list = function (req, res, next) {
 		var data;

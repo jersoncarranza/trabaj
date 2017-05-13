@@ -10,6 +10,7 @@ angular.module('App')
     function GetIdProfesor() {
         $http.get('/profesor/list/'+ id).success(function (data, status, headers, config) {
             $scope.profesor = data;
+            
             $scope.placement = {
             options: [
             'Profesor',

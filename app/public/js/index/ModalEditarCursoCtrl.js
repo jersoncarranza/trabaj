@@ -180,6 +180,10 @@ angular.module('App')
             formData.append("descripcion", curso.descripcion);
             formData.append("fecha_inicio", curso.fecha_inicio);
             formData.append("precio", curso.precio);
+            formData.append("pension", curso.pension);
+            formData.append("meses", curso.meses);
+          
+
             return $http.put("/curso/edit/" + id , formData,{
                 headers:{
                     "Content-type": undefined

@@ -96,32 +96,27 @@ angular.module('App')
         	GetAllTeacher();	
         });
 	};
+	    //=========Ventana modal para ver los pagos
+    $scope.pagos = function (cedula) {
+
+        localStorage.setItem("cedularol",  cedula); 
+        var size= 'lg';
+        var modalInstance = $uibModal.open({
+        animation: $scope.animationsEnabled,
+        ariaLabelledBy: 'modal-title',
+        ariaDescribedBy: 'modal-body',
+        templateUrl: 'views/index/modalListaRolesPagos.html',
+        controller: "modalListaRolesPagosCtrl",
+        size: size
+        });
+    };
 
 	//Eliminar un profesor.
 
   	$scope.remove = function (data) {
   		var id = data.id;
   		var cedula = data.cedula;
-  		/*
-  		alertify.confirm('Eliminar profesor', '¿Deseas eliminar este profesor?',
-		function(){
-
-		    $http.delete('/profesor/removeTeacher/' +id).success(function (data) {
-			console.log(data);
-			GetAllTeacher();
-				if (data.estado == 0 ) {
-					alertify.success(data.mensaje);
-				}else{
-					alertify.error(data.mensaje)
-				}
-			});
-		},
-		  function(){
-		    alertify.notify('Cancelación');
-		});
-
-  		*/
-		alertify.prompt("Ingrese la cédula del profesor para eliminar.", "",
+		alertify.prompt("Eliminar Profesor","Ingrese la cédula del profesor para eliminar.", "",
 		function(evt, value ){
 			console.log(value, cedula);
 			if (value === cedula) {

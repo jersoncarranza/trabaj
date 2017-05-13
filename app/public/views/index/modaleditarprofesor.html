@@ -16,6 +16,15 @@
                 <input placeholder="Apellido" type="text" name="name" id="name" class="form-control" ng-model="profesor.apellido" required />
                 <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Apellido del profesor</span>
             </div>
+             <div class="col-sm-12 form-group" ng-class="{ 'has-error': form.sueldo.$dirty && form.sueldo.$error.required }">
+                <label  for="username">Sueldo</label>
+                 <div class="input-group input-group-sm">
+                    <input placeholder="Sueldo" type="Number" name="sueldo" id="sueldo" class="form-control" ng-model="profesor.sueldo" required />
+                    <span class="input-group-addon" id="sizing-addon3">$</span>
+                 </div>
+
+                <span ng-show="form.sueldo.$dirty && form.sueldo.$error.required" class="help-block">Sueldo ejemplo: 300$</span>
+            </div>
             <div class="col-sm-12 form-group" ng-class="{ 'has-error': form.cargo.$dirty && form.cargo.$error.required }">
                 <label  for="cargo" >Cargo</label>
                 <select class="form-control" name="cargo" id="cargo" ng-model="profesor.cargo" required  ng-options="o as o for o in placement.options"></select>

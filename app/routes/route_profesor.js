@@ -6,7 +6,8 @@ var teacherController = require('../controllers/teacher_controller.js');
 router.get('/profesor/list', teacherController.list);	
 //Litar los atributos de cada profesor 	
 router.get('/profesor/list/:id', teacherController.listId);	
-
+//
+router.get('/profesor/listcedula/:cedula', teacherController.FindOneUserCedula);	
 //añadir un profesor
 router.post('/profesor/register', teacherController.new);	
 //lista los profesores

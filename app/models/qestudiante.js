@@ -117,7 +117,7 @@ exports.login = function (cedula, contrasena, callback) {
 //Modificar: Añadir un curso 
 exports.addcursoEstudiante = function (cedula, data, callback) {
 	var query = {cedula:cedula};
-	console.log("data", data);
+	
 	var campos={
 		cursos:{
 			id_curso: data.id_curso, 
@@ -146,6 +146,7 @@ exports.cambiarEstadoCurso = function (cedula , curso, callback) {
 //cambiar para de estado
 exports.addcursoEstudiante2 = function (cedula, curso, callback) {
 	var query = {cedula:cedula};
+	console.log("data22", curso);
 	var campos={
 		cursos:{
 			estado :"1",
@@ -157,7 +158,7 @@ exports.addcursoEstudiante2 = function (cedula, curso, callback) {
 	models.Estudiante.update(query, {$addToSet:campos}, callback);
 };
 
-
+//estudiantes matriculado
 exports.listcursosestudiantes = function (curso, callback) {
 	console.log(curso);
 	var query = {
@@ -175,4 +176,74 @@ exports.listcursosestudiantes = function (curso, callback) {
 		sexo:1
 	};
 	models.Estudiante.find(query, campos, callback);
+};
+
+//estudiantes prematriculado
+//estudiantes matriculado
+exports.estudiateprematricula = function (callback) {
+	var query = {
+		"cursos":{$elemMatch: {estado: "0"}}
+	};
+	var campos = {
+		cedula:1,
+		nombres:1,
+		apellido1:1,
+		apellido2:1,
+		telefono:1,
+		email:1,
+		sexo:1
+	};
+	models.Estudiante.find(query, campos, callback);
+};
+
+//======================Materia===============
+exports.materia = function (callback){
+	var query = {
+		"cursos":{
+			//$elemMatch: {id_curso: id},
+			$elemMatch: {estado: "1"}
+		}
+	};
+	var campos = {
+		cedula:1,
+		nombres:1,
+		apellido1:1,
+		apellido2:1,
+		telefono:1,
+		email:1,
+		sexo:1,
+		cursos:1
+	};
+	models.Estudiante.find(query, campos, callback);
+};
+//==============lista de pagos de un cliente=====
+exports.materiapagos = function (id,callback) {
+	var query = {
+		cedula:id,
+		"cursos":{$elemMatch: {estado: "1"}}
+		//"cursos.estado":"1"
+		//"cursos.id_curso":idcurso,
+		//"cursos":{id_curso: idcurso}
+
+		//"cursos":{$elemMatch: {estado: "1", id_curso:idcurso}}
+	};
+	var campos = {
+		cedula:1,
+		cursos:1
+		/*
+		"cursos.nombre_curso":1,
+		"cursos.pagos":1,
+		*/
+	};
+	models.Estudiante.findOne(query, campos, callback);
+};
+
+//==================Actualizar pensiones
+exports.actualizarPagosPensiones = function (cedula, documento,callback) {
+	var query = {
+		cedula:cedula
+	};
+	
+	models.Estudiante.update(query,documento,callback);
+	//  {$set:campos}
 };

@@ -1,18 +1,12 @@
-<h3>Codigo de cuentas</h3>
 <section class="container">
-	<div>
-	<input type="text" ng-model="dato.nombrecuenta" placeholder="nombre"><br>
-	<input type="text" ng-model="dato.codigocuenta" placeholder="codigo"><br>
-	<button class="btn btn-success" ng-click="save()">Guardar</button>
-	</div>
     <div class="panel panel-default"> 
-     <div class="panel-heading"> Cuentas</div>
+     <div class="panel-heading"><span class="btn" ng-click="opencuenta()"><i class="glyphicon glyphicon-plus-sign icon-mas"></i></span> Codigo de Cuentas</div>
         <table class="table table-hover">
             <thead>
                 <tr>
                     <td><b>Nombre<b></td>
                     <td><b>Descripción<b></td>
-                    <td><b>Editar / Eliminar</b></td>
+                    <td><b>Editar </b></td>
                 </tr>
             </thead>
             <tbody ng-repeat="p in cuenta">

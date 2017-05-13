@@ -271,7 +271,9 @@ angular.module('App')
 		formData.append("descripcion", curso.descripcion);
 		formData.append("fecha_inicio", curso.fecha_inicio);
 		formData.append("precio", curso.precio);
-		console.log("precio : ", curso.precio);
+		formData.append("pension", curso.pension);
+        formData.append("meses", curso.meses);
+        
 
 		return $http.post("/curso/register", formData,{
 			headers:{

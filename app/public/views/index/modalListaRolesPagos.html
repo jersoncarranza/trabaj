@@ -1,0 +1,35 @@
+
+<section class="container">
+	<center>
+    	<h3>Fundación "JASPE"</h3>
+	    <h3>Información de roles de pagos</h3>
+    </center>
+	<div class="col-sm-6">Cédula  : <b>{{profesor.cedula}}</b>  </div>
+    <div class="col-sm-6">Empleado: <b> {{profesor.nombre}} {{profesor.apellido}}</b></div>
+	<div>
+		<table class="table table-hover col-sm-6">
+			<thead>
+				<tr>
+					<th> <b> Mes</b> </th>
+					<th> <b> Fecha de cobro</b> </th>
+					<th> <b> Sueldo</b> </th>
+					<th> <b> Comisión</b> </th>
+					<th> <b> Aportación IESS</b> </th>
+					<th> <b> Prestamo</b> </th>
+					<th> <b> Neto</b> </th>
+				</tr>
+				</thead>
+		<tbody>
+			<tr ng-repeat="a in datos">
+				<td >{{a.mes}}</td>
+				<td>{{a.date}}</td>
+				<td>${{a.sueldo}}</td>
+				<td>${{a.comision}}</td>
+				<td>${{a.iesstrabajador}}</td>
+				<td>${{a.prestamo}}</td>
+				<td><b> ${{ (a.sueldo + a.comision) - (a.iesstrabajador + a.prestamo ) }}</b></td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+</section>

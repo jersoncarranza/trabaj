@@ -25,6 +25,23 @@
     #btn-minus{
     	display: none;
     }
+  .margin{
+        margin-top: 4em;
+        padding-top: 4em;
+    }
+    .margin-logo{
+        text-align: right;
+        margin-left: 45em;
+        margin-top: -8em;
+    }
+    .margen-botones{
+        padding-top: 2em;
+        margin-top:  2em;
+    }
+    .mm{
+        margin-top: -1em;
+        margin-bottom: 1em
+    }
 </style>
 
 <section class="encabezado">
@@ -34,19 +51,20 @@
     <div>
         <img class="margin-logo" ng-src="../img/logo.jpg" height="40" witdh="40">
     </div>
+    <center>
+        <h2 class="mm">Cobro de Matrícula</h2>
+    </center>
 </section>
+
 <section class="datos col-md-12">
     <div class="col-md-5 b1">
-        <p>Cédula del cliente: <b id="cedula"></b></p>
-        <p><div id="nombres"> </div></p>
-        <p>Teléfono: +593 985527750</p>
+        <p>Cédula <b id="cedula"></b></p>
+        <p>Nombres <b id="nombres"> </b></p>
     </div>
     <div class="col-md-5 b1 mrg">
         <p>Fecha emisión: <b id="fecha"></b> </p>
         <p>Atentido por: Carolina Alban</p>
-        <p>Terminos:
-        <select  class="b-cbx" ng-model="selectedOption" ng-options="option.name for option in options"></select>
-        </p>
+        
 </section>  
 
 <section class="col-md-12 ">
@@ -61,89 +79,26 @@
             <div class="col-md-3"></div>
         <!-- <div class="col-md-3"><b id="codigo">{{c.id_curso}}</b></div> -->
             <div class="col-md-4"><b id="detalle">{{c.nombre_curso}}</b>  </div>
-            <div class="col-md-1"><b id="precio">{{c.precio_curso}}</b></div>
+            <div class="col-md-1"><b id="precio">${{c.precio_curso}}</b></div>
             <div class="col-md-3"></div>
             <div class="col-md-1">
                  <btn class="glyphicon glyphicon-minus" name="suma" type="button" ng-click="sacar(c)"/>
             </div>
             <br>
         </div>
-       <!-- 
-       <div class="col-md-3"><b id="codigo"></b></div>
-       <div class="col-md-7">
-           <select id="curso" name="curso" class="form-control b-cbx"  ng-model="matricula.curso"  ng-change="change(matricula)" ng-options="o as o for o in placement.options" required></select>
-       </div>
-       <div class="col-md-1"><b id="precio"></b></div>
-       <br>
-       
-       <div >
-           <div class="col-md-3" id="aux_codigo"></div>
-                   <div class="col-md-7" id="container"></div>
-                   <div class="col-md-1" id="aux_precio"></div>
-       </div> 
-       -->
     </div>
 
-    <div class="col-md-1">
-        <btn id="btn-plus" class="glyphicon glyphicon-plus" name="suma" type="button" ng-click="sumar()" value="suma" /> <br>
-        <btn id="btn-minus" class="glyphicon glyphicon-minus" name="suma" type="button" ng-click="restar()" value="restar" />
-    </div>
     . 
 </section>
 
-
-
-    <div class="form-group col-md-offset-1">
-        <form name="form">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
-        <div class="form-group col-md-12 margen-botones">
-            <button class="btn btn-lg" type="button" ng-click="Reporte(estudiante)">REPORTE</button>
-            <button class="btn btn-lg btn-primary col-md-offset-3 col-md-4" type="button" ng-click="Save(estudiante)" ng-disabled="form.$invalid || vm.dataLoading">Matricular</button>
-            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkE CQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-        </div>
-        </form>
-    .
+<div class="form-group col-md-offset-1">
+    <form name="form">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+    <div class="form-group col-md-12 margen-botones">
+        <button class="btn btn-lg btn-primary col-md-offset-3 col-md-4" type="button" ng-click="Save(estudiante)" ng-disabled="form.$invalid || vm.dataLoading">Matricular</button>
+        <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkE CQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
     </div>
-    <section>
-        <style type="text/css">
-            .margin{
-                margin-top: 4em;
-                padding-top: 4em;
-            }
-            .margin-logo{
-                text-align: right;
-                margin-left: 45em;
-                margin-top: -8em;
-            }
-            .margen-botones{
-                padding-top: 2em;
-                margin-top:  2em;
-            }
-        </style>
-
-    </section>
-    <script type="text/javascript">
-       //onchange
-        
-        function myFunction() {
-            var x = document.getElementById("mySelect1").value;
-            var stored = localStorage['myKey'];
-            var myVar = JSON.parse(stored);
-            
-            for (var i = 0; i < myVar.length; i++) {
-            	if (x == myVar[i].nombre) {
-            		var id= myVar[i]._id.substr(-4);//codigo
-            		console.log(id);
-            		console.log(myVar[i].nombre);
-            		console.log(myVar[i].precio);
-
-            		document.getElementById('codigo').value= id;
-            		// document.form.codigo0.value = id;
-            	}
-            }
-            
-        }
-        
-    </script>
-
-
+    </form>
+.
+</div>
+<script src="../js/src/jspdf.debug.js"></script>

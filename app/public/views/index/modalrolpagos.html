@@ -1,75 +1,105 @@
+	<section>
 
-<section>
-		
-		<br>
-		<br>
-		<b class="col-sm-9">Fundación Jaspe</b>
-		<div class="col-sm-3">No: 003</div>
-		<br>
-		<br>
-		<div class="col-sm-6">ROL DE PAGOS INDIVIDUAL </div>
-		<div class="col-sm-6">MES DE : MAYO del 2016 </div>
-		<br>
-		<br>
-		<section>
-			<div class="col-sm-6">Empleado: <b> {{profesor.nombre}} {{profesor.apellido}}</b></div>
-			<div class="col-sm-6"></b></div>
-			<br>
-			<div class="col-sm-6">Cargo: <b> {{profesor.cargo}}</b></div>
-			<div class="col-sm-6"></div>
-		</section>
-		<br>
-		<br>
-		<section  class="line">
-			<div class="col-sm-6" ><b>Ingresos</b></div>
-			<div class="col-sm-6" ><b>Descuentos</b></div>
-			<br><br>
-			<div class="col-sm-3" >Sueldo básico</div>
-			<div class="col-sm-3" >$ 340</div>
-			<div class="col-sm-4" >Aporte IESS</div>
-			<div class="col-sm-2" >$ 41</div>
-			<br>
-			<div class="col-sm-3" >Horas Extras</div>
-			<div class="col-sm-3" >$ 0</div>
-			<div class="col-sm-4" >Préstamos quirografarios IESS</div>
-			<div class="col-sm-2" >$ 0</div>
-			<br>
-			<div class="col-sm-3" >Comisiones</div>
-			<div class="col-sm-3" >$100</div>
-			<div class="col-sm-4" >Préstamos y anticipos empresa</div>
-			<div class="col-sm-2" >$ 0</div>
-		</section>
-
-		<br>
-		<br>
-		<section class="line">
-			
-			<div class="col-sm-3" >Total Ingresos</div>
-			<div class="col-sm-3" >$440</div>
-			<div class="col-sm-4" >Total Descuentos</div>
-			<div class="col-sm-2" >$ 0</div>
-		</section>
-		<br>
-		<br>
-		<section class="line">
-			<div class="col-sm-9" ><b> Neto a pagar</b></div>
-			<div class="col-sm-3" > <b> $398.86 </b></div>
-		</section>
-		<br>
-		<br>
-		<div class="col-sm-4 col-sm-offset-4" >__________________</div>
-		<div class="col-sm-4" ></div>
-		<div class="col-sm-4 col-sm-offset-4" >Recibi conforme</div>
-		<div class="col-sm-4" ></div>
-		<br>
-		<br>
-		<div class="col-sm-4 col-sm-offset-4" >C.I.  {{profesor.cedula}} </div>
-
-		<br><br>
-
-		 <button class="btn btn-primary col-sm-4 col-sm-offset-4" type="button" ng-click="">Imprimir</button>
+	<center>
+        <h2>Fundación "Jaspe"</h2><br>
+    </center>
+    <div>
+        <img class="margin-logo" ng-src="../img/logo.jpg" height="40" witdh="40">
+    </div>
+    <center>
+        <h2 class="mm">Rol de Pagos</h2>
+        
+    </center>
+	<div class="col-sm-6">Empleado: <b> {{profesor.nombre}} {{profesor.apellido}}</b></div>
+	<div class="col-sm-6">Atendido por: <b>Carolina Alban</b>  </div>
+	<br>
+	<div class="col-sm-6">Cargo: <b> {{profesor.cargo}}</b></div>
+	<div class="col-sm-6">Fecha:{{fecha}}</div>
 	
-</section>
+	
+	<div  class="col-sm-6">Cédula:{{profesor.cedula}} </div>
+	<div  class="col-sm-2">Mes </div>
+	<div class="col-sm-2"> <select name="fecharol" id="fecharol" ng-model="meses.value"  ng-options="v for v in meses.values"></select></div>
+	<br>
+	<br>
+	<br>
+	</section>
+
+	<section  class="line">
+		<br>
+		<table class="col-sm-6">
+		<tbody>
+			<tr><td class="col-sm-offset-1 col-sm-5"><b>Ingresos</b></td></tr>
+			<tr>
+				<td class="col-sm-4">Sueldo</td>
+				<td class="col-sm-2">
+				<form name="form" class="" role="form" enctype="multipart/form-data">
+					<div ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+					<label name="name" id="name">
+						${{profesor.sueldo}}
+					</label>
+					</div>
+				</form>
+				</td>
+			</tr>
+	
+			<tr>
+				<td class="col-sm-4">Comisiones</td>
+				<td class="col-sm-2"><input placeholder="$0" type="number" name="comisiones" id="comisiones" ng-keydown="checkKeyDown($event)" ng-model="comisiones" value="0" onkeypress="return soloNumeros(event)"  required /></td>
+			</tr>
+		</tbody>
+		</table>
+
+		<table class="col-sm-6">
+		<tbody>
+			<tr><td class="col-sm-offset-1 col-sm-5"> <b> Descuentos</b></td></tr>
+			<tr>
+				<td class="col-sm-4">Aporte IESS 9.45%</td>
+				<td class="col-sm-2"><input placeholder="0" type="number" name="descuentos" id="descuentos" ng-keydown="checkKeyDown($event)" value="{{iess}}" step="0.01" onkeypress="return soloNumeros(event)"  required disabled/></td>
+			</tr>
+	
+			<tr>
+				<td class="col-sm-4">Préstamos a la Fundación</td>
+				<td class="col-sm-2"><input placeholder="0$" type="number" name="prestamos" id="prestamos" ng-keydown="checkKeyDown($event)" ng-model="descuento" value="0" onkeypress="return soloNumeros(event)"  required /></td>
+			</tr>
+		</tbody>
+		</table>
+	
+	</section>
+
+	<br>
+	<br>
+	<section class="col-sm-12">
+		<div class="col-sm-3" >Total Ingresos</div>
+		<div class="col-sm-3" >${{profesor.sueldo + comisiones}}</div>
+		<div class="col-sm-3" >Total Descuentos</div>
+		<div class="col-sm-3" >$ {{(profesor.sueldo * 0.0945 | setDecimal:2) + descuento}}</div>
+	</section>
+	<br>
+	<br>
+	<section class="12">
+	
+		<div class="col-sm-9 bf" ><b> Neto a pagar</b></div>
+		<div class="col-sm-3 bf" > <b> ${{(profesor.sueldo + comisiones) - ((profesor.sueldo * 0.0945 | setDecimal:2) + descuento)}}</b></div>
+		</div>
+		<br><br>
+		<div class="line"></div>
+	</section>
+	<br>
+	<br>
+	<div class="col-sm-4 col-sm-offset-4" >__________________</div>
+	<div class="col-sm-4" ></div>
+	<div class="col-sm-4 col-sm-offset-4" >Recibi conforme</div>
+	<div class="col-sm-4" ></div>
+	<br>
+	<br>
+	<div class="col-sm-4 col-sm-offset-4" >C.I.  {{profesor.cedula }} </div>
+
+	<br><br>
+
+	 <button class="btn btn-primary col-sm-4 col-sm-offset-4" type="button" ng-click="guardar()"  ng-disabled="form.$invalid || vm.dataLoading">Guardar</button>
+	
+	<script src="../js/src/jspdf.debug.js"></script>
 
 <style type="text/css">
 	.line{
@@ -77,5 +107,90 @@
 		border-top-style: solid;
 		border-color: black;
 	}
+    .b1 {
+        border-style: solid;
+        border-width: 2px;
+        border-color: black;
+        border-radius: 10px;
+    }
+    .mrg{
+        padding-left: 2em;
+        margin-left: 2em;
+    }
+    .b-cbx{
+        border-color: white;
+        border:white;
+    }
+    .bd{ /*margen del*/
+
+        margin-top: 1em;
+        border-style: solid;
+        border-width: 2px;
+        border-color: black;
+        border-radius: 10px;
+    }
+    #btn-minus{
+    	display: none;
+    }
+  .margin{
+        margin-top: 4em;
+        padding-top: 4em;
+    }
+    .margin-logo{
+        text-align: right;
+        margin-left: 45em;
+        margin-top: -8em;
+    }
+    .margen-botones{
+        padding-top: 2em;
+        margin-top:  2em;
+    }
+    .mm{
+        margin-top: -1em;
+        margin-bottom: 1em
+    }
+    .bf{
+    	padding-top: 3em
+    }
 
 </style>
+<script>
+    function soloLetras(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+       especiales = "8-37-39-46";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+
+    }
+
+    function soloNumeros(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       numeros = "0123456789.,";
+       especiales = "8-37-39-46";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(numeros.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+    }
+</script>

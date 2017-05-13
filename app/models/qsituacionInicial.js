@@ -15,7 +15,7 @@ exports.listEsi = function(callback){
 		pasivo:1,
 		patrimonio:1
 	}
-	models.situacionInicial.find(query, campos, callback);
+	models.situacionInicial.findOne(query, campos, callback);
 };
 
 exports.actualizarEsi = function (id , data, callback) {
@@ -26,4 +26,8 @@ exports.actualizarEsi = function (id , data, callback) {
 		patrimonio  : data.patrimonio
 	};
 	models.situacionInicial.update(query, {$set:campos}, callback);
+};
+
+exports.removeEsi = function( callback){
+	models.situacionInicial.remove(callback);
 };

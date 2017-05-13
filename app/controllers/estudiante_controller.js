@@ -1,5 +1,6 @@
 var EstudianteQuery 	= require("../models/qestudiante.js");
-
+var request				= require('request');
+var libroDiario     = require("../models/qLibroDiario");
 //crear un nuevo estudiante
 exports.new = function (req, res, next){
 	var data_aux = req.body;
@@ -15,7 +16,8 @@ exports.new = function (req, res, next){
 		cursos:[{
 			id_curso:     req.body.cursos.id_curso, 
 			nombre_curso: req.body.cursos.nombre_curso,
-			precio_curso: req.body.cursos.precio_curso
+			precio_curso: req.body.cursos.precio_curso,
+
 		}]
 	}
 
@@ -184,7 +186,6 @@ exports.login = function (req, res) {
 	});
 };
 
-
 //remove curso
 exports.removecurso = function (req, res) {
 	var id 		= req.params.id;
@@ -259,8 +260,6 @@ exports.removecurso = function (req, res) {
 		}
 	});
 };
-
-
 
 //remove curso por admin
 exports.removecursoadmin = function (req, res) {
@@ -337,7 +336,6 @@ exports.removecursoadmin = function (req, res) {
 	});
 };
 
-
 //listar estudiantes por cursos
 exports.listcursosestudiantes = function (req, res) {
 	var data_res;
@@ -369,3 +367,191 @@ exports.listcursosestudiantes = function (req, res) {
 		}
 	});
 };
+
+//actualizar  un estudiante
+exports.reportesestudiantes = function (req, res, next) {
+	var data_res;
+	var curso = req.params.curso;
+	EstudianteQuery.listcursosestudiantes(curso, function (err, docs){
+		var data = {
+				template:{'shortid':'rk0Lcxhhx'},
+				options:{preview:false},
+				data:{"people": docs}
+			}
+		
+		var options = {
+			uri: 'http://localhost:8001/api/report',
+			method: 'POST',
+			json: data
+		}
+
+		request(options).pipe(res);
+		
+	});
+	
+};
+
+exports.reportesestudiantes2 = function (req, res, next) {
+	EstudianteQuery.listEstudiante(function (err, docs){
+		var data = {
+				template:{'shortid':'r1tpwHm6g'},
+				options:{preview:false},
+				data:{"esi": docs}
+			}
+		
+		var options = {
+			uri: 'http://localhost:8001/api/report',
+			method: 'POST',
+			json: data
+		}
+
+		request(options).pipe(res);
+		
+	});
+};
+
+
+//estudiantes con prematricula
+exports.estudiateprematricula = function (req, res, next) {
+	EstudianteQuery.estudiateprematricula(function (err, doc) {
+		if(!err){
+			/*
+			var data_res={
+				doc:doc,
+				estado:0,
+				mensaje: "correctamente listado"
+			}*/
+			res.json(doc);
+		}else{
+			var data_res={
+				doc:doc,
+				estado:2,
+				mensaje: "Error del servidor"
+			}
+			res.json(doc);
+		}
+	});
+};
+
+//===================================Pensiones ==============
+//estudiantes con prematricula
+exports.materia = function (req, res, next) {
+	EstudianteQuery.materia(function (err, doc) {
+		if(!err){
+			res.json(doc);
+		}else{
+			var data_res={
+				doc:doc,
+				estado:2,
+				mensaje: "Error del servidor"
+			}
+			res.json(doc);
+		}
+	});
+};
+//======================Materia de pagos
+exports.materiapagos = function (req, res, next) {
+	var id=req.params.id;
+
+	
+	EstudianteQuery.materiapagos(id,function (err, doc) {
+		if(!err){
+			res.json(doc);
+		}else{
+			var data_res={
+				doc:doc,
+				estado:2,
+				mensaje: "Error del servidor"
+			}
+			res.json(doc);
+		}
+	});
+};
+
+exports.pagos = function (req, res, next) {
+	var cedula   = req.body.cedula;
+	var id_curso = req.body.id_curso;
+	var meses    = req.body.meses;
+	var respuesta;
+	let bandera = 1; //Todo bien
+
+	EstudianteQuery.FindOneEstudianteCedula(cedula,function (err, doc) {
+
+		for (var i = 0; i < doc.cursos.length; i++) {
+
+			if (doc.cursos[i].id_curso == id_curso) {
+				
+				//controla los meses que dura el curso
+				if (doc.cursos[i].pagos.length < meses) {
+
+					doc.cursos[i].pagos.push({
+						mes: req.body.pagos[0].mes,
+						cantidad: req.body.pagos[0].cantidad
+					})
+
+				}else{
+					bandera   = 0;
+				}
+
+			} 
+		} 
+
+		///=====================
+
+		if (bandera == 1) {
+			EstudianteQuery.actualizarPagosPensiones(cedula, doc, function (err1, doc2) {
+				libroInsetarDiario(req.body.pagos[0].cantidad);
+				if (doc2.ok == 1) {
+					respuesta={
+						estado:1,
+						mensaje:"correctamente"
+					}
+				}else{
+					respuesta={
+						estado:0,
+						mensaje:"Error"
+					}
+				}
+				res.json(respuesta);
+			})
+		}else{
+			respuesta = {
+				estado: 2,
+				mensaje:"Canceló todos los meses"
+			}
+			res.json(respuesta);
+		}
+
+
+
+	});
+
+	//=============Libro diario
+	function libroInsetarDiario(numero) {
+		
+			var asiento ={ //datos para el libro diario
+				//fecha: data.fecha_matricula,
+				descripcion:"Cobro de pensión",
+				debe:[{
+					codigo_cuenta:"1.1.1.1",
+					detalle:"caja",
+					cantidad:numero * 1 
+					}
+					],
+				haber:{
+					codigo_cuenta:"2.1.4.1",
+					detalle:"Cobro de pensión",
+					cantidad: numero 
+				},
+				sugerencia:"Cobro de pensión",
+			}
+			libroDiario.createAsiento(asiento, function(err,doc){
+				if (!err) {
+					data_res ={	estado:"0" 	}
+				}else{
+					data_res ={	estado:"1" 	}
+				}
+			})
+	}
+	//=============END Libro diario
+}

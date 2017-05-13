@@ -60,10 +60,30 @@ angular
 				controller: 'librodiarioCtrl',
 				controllerAs: 'diario'
 			})
+			.when('/pensiones', {
+				templateUrl: '../views/index/cobroPensiones.html',
+				controller: 'cobroPensionesCtrl',
+				controllerAs: 'pensiones'
+			})
 			.when('/situacioninicial', {
 				templateUrl: '../views/index/situacioninicial.html',
 				controller: 'situacioninicialCtrl',
 				controllerAs: 'esi'
+			})
+			.when('/mayor', {
+				templateUrl: '../views/index/libromayor.html',
+				controller: 'libromayorCtrl',
+				controllerAs: 'mayor'
+			})
+			.when('/materiales', {
+				templateUrl: '../views/index/materiales.html',
+				controller: 'materialesCtrl',
+				controllerAs: 'materiales'
+			})
+			.when('/arriendo', {
+				templateUrl: '../views/index/arriendo.html',
+				controller: 'arriendoCtrl',
+				controllerAs: 'arriendo'
 			})
 			.when('/:id', {
 				templateUrl: '../views/index/teacher-detail.html',

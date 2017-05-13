@@ -1,0 +1,46 @@
+<section class="container">
+    <div class="panel panel-default"> 
+     <div class="panel-heading"> <span class="btn" ng-click="openmateriales()"><i class="glyphicon glyphicon-plus-sign icon-mas"></i></span>Materiales de venta
+     <span class="btn derecha" ng-click="refresh()"><i class="glyphicon glyphicon-refresh icon-mas"></i></span> 
+    </div>
+        <table class="table table-hover col-sm-9">
+            <thead>
+                <tr>
+                    <td><b>Cantidad<b></td>
+                    <td><b>Nombre<b></td>
+                    <td><b>Editar</b></td>
+                    <td><b>Vender</b></td>
+                </tr>
+            </thead>
+            <tbody >
+                <tr ng-repeat="m in materiales">                                                             
+                    <td class="col-sm-2">{{m.cantidad}}</td>
+                    <td class="col-sm-3">{{m.nombre}}</td>
+                    <td class="col-sm-1"> <button class="btn btn-success" ng-click="openEditar(m)"><span class="glyphicon glyphicon-pencil"></span></button> </td>
+                    <td class="col-sm-3">
+                        <button class="btn btn-primary" ng-click="vender(m)"><span class="glyphicon glyphicon-credit-card"></span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>     
+    </div>
+</section>
+
+<section>
+    <style>
+      .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+      }
+      .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+      }
+      .margin{
+        margin-top: 3em;
+      }
+  
+    </style>
+</section>

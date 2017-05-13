@@ -53,7 +53,7 @@ angular.module('App')
     //lenar datos
     function llenarDatos() {
             document.getElementById('cedula').innerHTML = estudiante.cedula;
-            document.getElementById('nombres').innerHTML = estudiante.apellido1 + " " + estudiante.apellido2 + " " +estudiante.nombres;  
+            document.getElementById('nombres').innerHTML = estudiante.apellido1.toUpperCase() + " " + estudiante.apellido2.toUpperCase() + " " +estudiante.nombres.toUpperCase();  
             //fecha actual
             var hoy = new Date();
             var dd = hoy.getDate();
@@ -251,12 +251,13 @@ angular.module('App')
     }
 
     //boton matricular
+    var auxMatricula=[];
     $scope.Save = function(matricula){ //matricula reemplaza a estudiantes
         
         var f = new Date();
         var fecha = f.getDate() + "-" + (f.getMonth() +1) + "-" + f.getFullYear();
-        matricula.fecha_matricula = fecha; 
-        console.log("la matricula es", matricula);  
+        matricula.fecha_matricula = fecha;
+        auxMatricula=matricula;
         
         $http.post('/matricula/new/', matricula).success(function (data, status, headers, config) {
             $scope.respuesta = data;
@@ -272,7 +273,8 @@ angular.module('App')
            switch(estado){
                 case "0":
                       alertify.success('Matriculado correctamenta');
-                      Reporte();
+                      reporte();
+                      
                       $uibModalInstance.close();
                       break;
                 case "1":
@@ -283,7 +285,6 @@ angular.module('App')
                     break;
                 default:
                     alertify.error("Error!!");
-
             }
         })
         .error(function (data, status, header, config) {
@@ -294,27 +295,9 @@ angular.module('App')
                 "<br />config: " + jsonFilter(config);
         });
         
-        
-
-    }
+    };
     
-    $scope.Reporte =function(){    
-        var doc= new jsPDF();
-        //console.log(datos_cursos);
-
-        var curso = document.getElementById("curso").value;
-        var fecha = document.getElementById("fecha").value;
-        var precio = document.getElementById("precio").value;
-        console.log(curso, fecha, precio);
-        console.log(estudiante);
-        
-        
-        doc.setFontSize(16);
-        doc.text(80,20, "Fundación JASPE");
-        
-        doc.save();
-    }
-
+ 
 
 
     //funcion click
@@ -466,7 +449,48 @@ angular.module('App')
         
 
     };
-    
+    ///=======================Reporte=================
+  
+
+    function reporte() {
+        var doc = new jsPDF();
+        console.log("matricula2",auxMatricula);
+        doc.setFontSize(16);
+        doc.setFontType("bolditalic");
+        doc.text(80 , 20 , "Fundación 'JASPE'");
+        doc.text(70 , 30 , "Comprobante de matricula");
+
+        doc.setFontSize(12);
+        doc.setFontType("");
+        let x = 30;
+        let y = 50;
+
+        doc.text(x, y ,    "Cédula   : " + auxMatricula.cedula);
+        doc.text(x, y +10 , "Nombres : " + (auxMatricula.nombres).toUpperCase()+" "+ (auxMatricula.apellido1).toUpperCase()+" "+(auxMatricula.apellido2).toUpperCase());
+
+        doc.text(x+90,y, "Fecha de emisión : "+auxMatricula.fecha_matricula);
+        doc.text(x+90,y+10,"Atentido por : Carolina Alban");
+        y=y+30;
+        doc.setFontType("bold");
+        doc.text(x,y,"Detalle");
+        doc.text(x+100,y,"Precio");
+        doc.setFontType("");
+        var suma = 0;
+        for (var i = 0; i < auxMatricula.curso.length; i++) {
+            
+            y=y+10;
+            doc.text(x,y, (auxMatricula.curso[i].nombre_curso).toUpperCase() ) ;
+            suma =  suma + parseInt(auxMatricula.curso[i].precio_curso);
+            doc.text(x + 100,y, "$ " + (auxMatricula.curso[i].precio_curso).toString()) ;
+
+        }
+        doc.setLineWidth(1);
+        doc.text(x,y +20, "Total");
+        doc.line(x, y +  10 , x + 150, y + 10 );
+        doc.text(x + 100,y +20, "$ " + suma.toString());
+        doc.save('Matricula');
+        
+    };
 
 }]);
 

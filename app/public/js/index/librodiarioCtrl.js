@@ -2,11 +2,12 @@
 
 angular.module('App')
   .controller('librodiarioCtrl', function ($scope,$http, $uibModal, $log) {
-
-	var config = { headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'}}; 
-	
-	//listar estudiante
-   	function GetLibroDiario() {
+    var config = { headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'}}; 
+    
+            $scope.totalhaber=0;
+            $scope.totaldebe=0;
+    //listar estudiante
+    function GetLibroDiario() {
         $http.get('/contabilidad/librodiario/list').success(function (data, status, headers, config) {
             $scope.diario = data;
              var fecha;
@@ -15,6 +16,17 @@ angular.module('App')
                 fecha = fecha.substr(0,10);
                 $scope.diario[i].fecha = fecha.substr(0,10);
             }
+
+            for (var i = 0; i < data.length; i++) {
+                for (var j = 0; j < data[i].debe.length; j++) {
+                    $scope.totaldebe = $scope.totaldebe+ data[i].debe[j].cantidad;
+                }
+
+                for (var k = 0; k < data[i].haber.length; k++) {
+                    $scope.totalhaber = $scope.totalhaber +data[i].haber[k].cantidad;
+                }
+            }
+          
         })
         .error(function (data, status, header, config) {
             $scope.ResponseDetails = "Data: " + data +

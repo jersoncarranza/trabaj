@@ -8,7 +8,7 @@ angular.module('App')
     var datosEstudiantes;
 	//listar estudiante
    	function GetAllEstudiante() {
-        $http.get('/estudiante/list').success(function (data, status, headers, config) {
+        $http.get('/estudiates/prematricula/').success(function (data, status, headers, config) {
             $scope.estudiante = data;
         })
         .error(function (data, status, header, config) {
@@ -39,6 +39,9 @@ angular.module('App')
         	controller: "ModalMatriculaCtrl",
         	size: size,
     	});
+         modalInstance.result.then(function () {
+            GetAllEstudiante(); 
+        });
 	};
 	//
     var id = localStorage.getItem("id_rol");

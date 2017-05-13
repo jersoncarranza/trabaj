@@ -19,7 +19,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		    </button>
-		    <a class="navbar-brand" href="/">Fundación Jaspe</a>
+		    <a class="navbar-brand" href="/register#/">Fundación Jaspe</a>
 		  </div>
 	
 		  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -27,7 +27,7 @@
 		  
 		    <ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
-			  <a href="#/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.name}}<img class="img-circle" src="{{user.skin}}" width="25px"><span class="caret"></span></a>
+			  <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.name}}<img class="img-circle" src="{{user.skin}}" width="25px"><span class="caret"></span></a>
 			  <ul class="dropdown-menu">
 			    <li role="separator" class="divider"></li>
 			    <li><a href="/logout">Salir</a></li>
@@ -41,10 +41,13 @@
     <div class="container">
 	    <div id="sidebar">
 	        <ul>
+				<li><a href="#/matricula">Cobro de Matrícula</a></li>
+				<li><a href="#/pensiones">Cobro de Pensiones</a></li>
 	           	<li><a href="#/curso">Cursos </a></li>
-				<li><a href="#/matricula">Matrícula</a></li>
 				<li><a href="#/profesor">Profesores</a></li>
 				<li><a href="#/estudiante">Estudiantes</a></li>
+				<li><a href="#/materiales">Materiales</a></li>
+				<li><a href="#/arriendo">Arriendo</a></li>
 				<li><a href="#/general">General</a></li>
 				<li>
 					<b>Contabilidad</b>
@@ -52,7 +55,8 @@
 					<ul>
 						<li><a href="#/situacioninicial">Estado Inicial</a></li>
 						<li><a href="#/diario">Libro Diario</a></li>
-						<li><a href="#/cuenta">Codigo de Cuentas</a></li>
+						<li><a href="#/mayor">Libro Mayor</a></li>
+						<li><a href="#/cuenta">Código de Cuentas</a></li>
 					</ul>
 	        </ul>
 	    </div>
@@ -63,22 +67,23 @@
 	            <span class="bar"></span>
 	            <span class="bar"></span>
 	        </a>
-		    <div ng-view="" class="col-md-offset-2  col-md-6  col-xs-12  col-sm-9">
+
+		    <div ng-view="" class="col-sm-offset-1 col-md-6  col-xs-12  col-sm-9">
 			  	
 		    </div>
 	  
 	    </div>
 	</div>
-	       
- 	
+	
+	
 
 	<script type="text/javascript">
 
 		function myFunction() {
+		    /*
 			document.getElementsByClassName("container")style.left = "-250px";
 			document.getElementsByClassName("open-sidebar")style.left = "-250px";
 		    //alert("dio click");
-		    /*
 
 				.container.open-sidebar {
 				    left: 240px;
@@ -88,7 +93,7 @@
 		}	
 	</script>
 	
-
+	
     <script src="./js/src/jquery-2.0.3.min.js"></script>
     <script src="./js/src/angular.min.js"></script> 
     <script src="./js/src/angular-route.min.js"></script>
@@ -98,40 +103,51 @@
     <script src="./js/src/angular-animate.min.js"></script> 
     <script src="./js/src/ui-grid.min.js"></script> 
     <script src="./js/src/angular-pdf.min.js"></script> 
-   <!--  <script src="./js/src/ng-table.min.js"></script> 
-    <script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script>
-    -->
+   
     <script src="./js/index/app.js"></script>
+    <script src="./js/index/cobroPensionesCtrl.js"></script>
+    <script src="./js/index/cuentaCtrl.js"></script>
     <script src="./js/index/cursoCtrl.js"></script>
+    <script src="./js/index/materialesCtrl.js"></script>
     <script src="./js/index/cursoFactory.js"></script>
     <script src="./js/index/estudianteCtrl.js"></script>
     <script src="./js/index/generalCtrl.js"></script>
     <script src="./js/index/librodiarioCtrl.js"></script>
+    <script src="./js/index/libromayorCtrl.js"></script>
     <script src="./js/index/main.js"></script>
     <script src="./js/index/matriculaCtrl.js"></script>
+    <script src="./js/index/modalEditarCuentaCtrl.js"></script>
     <script src="./js/index/ModalEditarCursoCtrl.js"></script>
-    <script src="./js/index/modalEditarProfesorCtrl.js"></script>
+    <script src="./js/index/ModalEditarESICtrl.js"></script>
     <script src="./js/index/ModalEditarEstudianteCtrl.js"></script>
+    <script src="./js/index/modalEditarProfesorCtrl.js"></script>
     <script src="./js/index/ModalEstudianteCtrl.js"></script>
     <script src="./js/index/ModalMatriculaCtrl.js"></script>
+    <script src="./js/index/ModalNewCursoCtrl.js"></script>
+    <script src="./js/index/ModalNuevoESICtrl.js"></script>
+    <script src="./js/index/modalopencuentaCtrl.js"></script>
     <script src="./js/index/ModalProCtrl.js"></script>
     <script src="./js/index/modalrolpagosctrl.js"></script>
     <script src="./js/index/profesorCtrl.js"></script>
     <script src="./js/index/resultados.js"></script>
+    <script src="./js/index/situacioninicialCtrl.js"></script>
     <script src="./js/index/teacher-detail.js"></script>
     <script src="./js/index/teacherdirective.js"></script>
     <script src="./js/index/teacherFactory.js"></script>
-    <script src="./js/index/ModalNewCursoCtrl.js"></script>
-    <script src="./js/index/situacioninicialCtrl.js"></script>
-    <script src="./js/index/cuentaCtrl.js"></script>
-    <script src="./js/index/modalEditarCuentaCtrl.js"></script>
-    <script src="./js/index/ModalNuevoESICtrl.js"></script>
+    <script src="./js/index/pensionModalCtrl.js"></script>
+    <script src="./js/index/modalListaRolesPagosCtrl.js"></script>
+    <script src="./js/index/modalNewMaterialCtrl.js"></script>
+    <script src="./js/index/modalEditarMaterialCtrl.js"></script>
+    <script src="./js/index/modalVenderMaterialCtrl.js"></script>
+    <script src="./js/index/arriendoCtrl.js"></script>
+    <script src="./js/index/modalRegistrarArriendoCtrl.js"></script>
   
   
-
 	    <!-- JavaScript -->
 	<script src="./js/src/alertify.min.js"></script>
 	<script src="./js/src/jsplug.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 	<!-- CSS -->
 </body>

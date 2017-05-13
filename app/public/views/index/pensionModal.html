@@ -1,0 +1,101 @@
+<style type="text/css">
+    .b1 {
+        border-style: solid;
+        border-width: 2px;
+        border-color: black;
+        border-radius: 10px;
+        margin-right: 3em;
+    }
+    .mrg{
+        padding-left: 2em;
+        margin-left: 2em;
+    }
+    .b-cbx{
+        border-color: white;
+        border:white;
+    }
+    .bd{ /*margen del*/
+
+        margin-top: 1em;
+        border-style: solid;
+        border-width: 2px;
+        border-color: black;
+        border-radius: 10px;
+    }
+    #btn-minus{
+    	display: none;
+    }
+  .margin{
+        margin-top: 4em;
+        padding-top: 4em;
+    }
+    .margin-logo{
+        text-align: right;
+        margin-left: 45em;
+        margin-top: -8em;
+    }
+    .margen-botones{
+        padding-top: 2em;
+        margin-top:  2em;
+    }
+    .mm{
+        margin-top: -1em;
+        margin-bottom: 1em
+    }
+    .bordemodal{
+    	margin-top: 2em;
+    }
+</style>
+
+<section class="container">
+	<div class="encabezado">
+		<center>
+        	<h2>Fundación "Jaspe"</h2><br>
+   		</center>
+	    <div>
+	        <img class="margin-logo" ng-src="../img/logo.jpg" height="40" witdh="40">
+	    </div>
+	    <center>
+        	<h2 class="mm">Cobro de Pensión</h2>
+    	</center>
+	</div>
+	<div class="col-md-5 b1">
+		<p> Estudiante :<b> {{estudiante.nombres}} {{estudiante.apellido1}} {{estudiante.apellido2}} </b></p>
+		<p>Cédula:<b> {{estudiante.cedula}}</b>.</p>
+	</div>
+	
+	<div class="col-md-5 b1 mrg">
+		<p>Fecha: {{fecha}}</p>
+		<p>Atendido: Carolina Alban</p>
+	</div>
+
+	<div class="col-md-11 bd">
+	 	<div class="col-md-offset-1 col-md-8">
+	 		<div ng-init="myVar = true"></div>
+	 		<div ng-init="myVar2 = False"></div>
+	 		
+	 		<div  ng-if="myVar">
+	 			
+	 		<h4>Comprobante de pensión por el curso de  <b>{{curso.nombre}}</b> 
+	 		correspondiente al mes de <b>{{mes}}</b> por el valor de <b>${{curso.pension}}</b></h4>
+	 		</div>
+	 		<div ng-if="myVar2">
+	 			<h4>Cancelado todos los meses</h4>
+	 		</div>
+
+		</div>
+			<br><br>
+
+	</div>
+	<div class="col-md-11 bd">
+		<div class="col-md-offset-1 col-md-8">
+	 		<h4>Meses cancelados: {{mesesPagados}} <b ng-repeat="a in meses2"> {{a.mes}} </b> </h4>
+		</div>
+	</div>
+	<div class="col-md-12 bordemodal modal-footer">
+                <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary" ng-click="pagar()" >Cobrar</button>
+                <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                 <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+        </div>
+</section>
+<script src="../js/src/jspdf.debug.js"></script>

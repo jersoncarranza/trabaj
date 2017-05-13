@@ -10,7 +10,8 @@
                 <tr>
                     <td><b>Cédula<b></td>
                     <td><b>Nombre</b></td>
-                    <td><b>Rol de Pagos</b></td>
+                    <td><b>Generar Rol de Pagos</b></td>
+                    <td><b>Ver Pagos</b></td>
                     <td><b>Modificar / Eliminar</b></td>
                 </tr>
             </thead>
@@ -20,6 +21,11 @@
                     <td  ng-model="p.nombre">{{p.nombre}} {{p.apellido}}</td>
                     <td>
                         <button class="btn btn-primary" ng-click="openrol(p)"><span class="glyphicon glyphicon-list-alt"></span></button>
+                    </td> 
+                    <td>
+                        <a href="#/profesor">
+                        <span ng-click="pagos(p.cedula)" class="glyphicon glyphicon-eye-open"></span>
+                        </a>
                     </td>
                     <td>
                         <button class="btn btn-success" ng-click="openedit(p)"><span class="glyphicon glyphicon-pencil"></span></button>

@@ -1,0 +1,34 @@
+<section class=" container">
+    <div class="panel panel-default">
+  <!-- Default panel contents -->
+    <div class="panel-heading">Cobro de pensiones</div>
+  <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Cédula</th>
+                    <th>Nombres y Apellidos</th>
+                    <th>Cursos</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="e in estudiantes ">
+                <tr>
+                    <td>{{e.cedula}}</td>
+                    <td>{{e.nombres}} {{e.apellido1}} {{e.apellido2}}</td>
+                    
+                    <td  >
+                        <table>
+                            <tr ng-repeat="m in e.cursos | orderBy:'nombre_curso'">
+                                <td>
+                                <a ng-click="pensionModal(e, m)">{{m.nombre_curso}}</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                </tr>    
+            </tbody>
+            
+        </table>
+    </div>
+</section>

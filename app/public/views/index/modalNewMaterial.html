@@ -1,0 +1,56 @@
+ <section  class="">
+
+        <form name="form" class="" role="form" enctype="multipart/form-data">
+            <h2>Registar nuevo material que adquirió</h2>
+          
+
+            <div class="form-group  col-xs-12" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+                <label  for="name">Nombre del artículo</label>
+                <input placeholder="Nombre del artículo" type="text" name="name" id="name" class="form-control" ng-model="articulo.nombre" required />
+                <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Nombre del artículo</span>
+            </div>
+            
+            <div class="form-group  col-xs-6" ng-class="{ 'has-error': form.costo.$dirty && form.costo.$error.required }">
+                <label  for="costo">Costo del artículo</label>
+                <div class="input-group input-group-sm">
+                    <input type="number" class="form-control" name="costo" id="costo" ng-model="articulo.costo" placeholder="costo" aria-describedby="sizing-addon3" required>
+                    <span class="input-group-addon" id="sizing-addon3">$</span>
+                </div>
+                <span ng-show="form.costo.$dirty && form.costo.$error.required" class="help-block">Costo que adquirio el artículo</span>
+            </div>
+            <!--  -->
+            <div class="form-group col-xs-6" ng-class="{ 'has-error': form.precio.$dirty && form.precio.$error.required }">
+                <label  for="precio">Precio del artículo</label>
+                <div class="input-group input-group-sm">
+                    <input placeholder="Precio para la venta" type="number" name="precio" id="precio" class="form-control" ng-model="articulo.precio" required />
+                    <span class="input-group-addon" id="sizing-addon3">$</span>
+                </div>
+                <span ng-show="form.precio.$dirty && form.precio.$error.required" class="help-block">Precio para la venta</span>
+            </div>
+
+            <div class="">..</div>
+            <div class="modal-footer col-xs-12">
+                <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary" ng-click="save()" >Guardar</button>
+                <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                 <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+            </div>
+          <div class="">..</div>
+        </form>
+</section>
+<section>
+    <style>
+      .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+      }
+      .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+      }
+      .margin{
+        margin-top: 3em;
+      }
+    </style>
+</section>

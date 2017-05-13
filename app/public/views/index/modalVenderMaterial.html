@@ -1,0 +1,129 @@
+<section class="encabezado">
+    <center>
+        <h2>Fundación "Jaspe"</h2><br>
+    </center>
+    <div>
+        <img class="margin-logo" ng-src="../img/logo.jpg" height="40" witdh="40">
+    </div>
+    <center>
+        <h2 class="mm">Comprobante de venta</h2>
+    </center>
+</section>
+
+<section  class="">
+    <form name="form" role="form" enctype="multipart/form-data">
+
+         <div class="form-group  col-xs-2">
+            <label >Cantidad</label>
+            <input placeholder="0" type="number" ng-model="articulo.cantidadcomprar" class="form-control" onkeypress="return soloNumeros(event)"   />
+        </div>
+        <div class="form-group  col-xs-6" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+            <label  for="name">Nombre del artículo</label>
+            <input placeholder="Nombre del artículo" type="text" name="name" id="name" class="form-control" ng-model="articulo.nombre" disabled required />
+            <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Nombre del artículo</span>
+        </div>
+        <div class="form-group  col-xs-2" ng-class="{ 'has-error': form.precio.$dirty && form.precio.$error.required }">
+            <label  for="precio">Precio Unitario</label>
+            <div class="input-group input-group-sm">
+                <input onkeypress="return precio(event)" type="number" class="form-control" name="precio" id="precio" ng-model="articulo.precio" placeholder="precio" aria-describedby="sizing-addon3" disabled required>
+                <span class="input-group-addon" id="sizing-addon3">$</span>
+            </div>
+        </div>
+
+        <div class="form-group  col-xs-2" ng-class="{ 'has-error': form.total.$dirty && form.total.$error.required }">
+            <label  for="total">Precio Total</label>
+            <div class="input-group input-group-sm">
+                <input onkeypress="return precio(event)" type="number" class="form-control" name="total" id="total" value="{{articulo.cantidadcomprar * articulo.precio}}" placeholder="total" aria-describedby="sizing-addon3" disabled required>
+                <span class="input-group-addon" id="sizing-addon3">$</span>
+            </div>
+        </div>
+        
+        <div class="">..</div>
+        <div class="modal-footer col-xs-12">
+            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary" ng-click="vender()" >Vender</button>
+            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+        </div>
+        <div class="">..</div>
+    </form>
+</section>
+<section>
+    <style type="text/css">
+         .margin{
+        margin-top: 4em;
+        padding-top: 4em;
+    }
+    .margin-logo{
+        text-align: right;
+        margin-left: 45em;
+        margin-top: -8em;
+    }
+    .margen-botones{
+        padding-top: 2em;
+        margin-top:  2em;
+    }
+    .mm{
+        margin-top: -1em;
+        margin-bottom: 1em
+    }
+    </style>
+        <script>
+    function soloLetras(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+       especiales = "8-37-39-46";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+
+    }
+
+    function soloNumeros(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       numeros = "0123456789";
+       especiales = "8-37-39-46";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(numeros.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+    }
+
+    function precio(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       numeros = "0123456789.";
+       especiales = "8-37-39-46";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(numeros.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+    }
+</script>
+</section>

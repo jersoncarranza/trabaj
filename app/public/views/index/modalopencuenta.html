@@ -1,0 +1,20 @@
+<section class="container">
+    <form name="form" role="form" enctype="multipart/form-data">
+        <h2>Insertar cuenta</h2>
+        <div class="col-sm-12 form-group" ng-class="{ 'has-error': form.cedula.$dirty && form.cedula.$error.required }">
+                <label  for="cedula">nombre cuenta</label>
+                <input type="text" name="cedula" id="cedula" class="form-control" ng-model="dato.nombrecuenta" placeholder="nombre" required />
+                <span ng-show="form.cedula.$dirty && form.cedula.$error.required" class="help-block">caja</span>
+        </div>
+        <div class="col-sm-12 form-group" ng-class="{ 'has-error': form.nombres.$dirty && form.nombres.$error.required }">
+                <label  for="nombres">codigo</label>
+                <input type="text" name="nombres" id="nombres" class="form-control" ng-model="dato.codigocuenta" placeholder="codigo" required />
+                <span ng-show="form.nombres.$dirty && form.nombres.$error.required" class="help-block">1.1.1.2</span>
+        </div>
+        <div class="modal-footer">
+                <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary" ng-click="save()" >Guardar</button>
+                <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                 <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+        </div>
+    </form>
+</section>

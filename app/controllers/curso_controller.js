@@ -12,7 +12,10 @@ exports.new = function (req, res, next) {
 		descripcion: req.body.descripcion,
 		extension:extension,
 		fecha_inicio:req.body.fecha_inicio,
-		precio:req.body.precio
+		precio:req.body.precio,
+		pension:req.body.pension,
+		meses:req.body.meses
+
 	}
 	
 	CursoQuery.createCurso(data, function (err, docs) {
@@ -95,7 +98,9 @@ exports.edit = function (req, res, next) {
 			descripcion: req.body.descripcion,
 			extension:extension,
 			fecha_inicio:req.body.fecha_inicio,
-			precio:req.body.precio
+			precio:req.body.precio,
+			pension:req.body.pension,
+			meses:req.body.meses
 		};
 	
 		CursoQuery.editCurso(id, data, function (err, docs) {
@@ -131,3 +136,4 @@ exports.edit = function (req, res, next) {
 		});
 	});
 };
+

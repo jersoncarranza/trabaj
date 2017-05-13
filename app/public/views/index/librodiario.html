@@ -4,7 +4,6 @@
 	<table class="table" id="table-libro">
 		<thead>
 			<tr>
-				<th>Nº</th>
 				<th>Fecha</th>
 				<th>Detalle</th>
 				<th>Debe</th>
@@ -13,7 +12,6 @@
 		</thead>
 		<tbody ng-repeat="l in diario">
 			<tr>
-				<td></td>
 				<td>{{l.fecha}}</td>
 				<td><center>Nº {{$index + 1}}</center></td>
 				<td></td>
@@ -21,29 +19,32 @@
 			</tr>
 			<tr ng-repeat="p in l.debe">
 				<td></td>
-				<td></td>
 				<td>{{p.detalle}} </td>
-				<td> {{p.cantidad}}</td>
+				<td class="ad">$ {{p.cantidad}}</td>
 				<td></td>
 			</tr>
 			<tr ng-repeat="p in l.haber">
-				<td></td>
 				<td></td>
 				<td class="dHaber">
 					<span class="listo">______</span>{{p.detalle}}
 					
 				</td>
 				<td></td>
-				<td>
-					{{p.cantidad}}
-				</td>
+				<td class="ad">$ {{p.cantidad}}	</td>
 			</tr>
 			<tr>
-				<td></td>
 				<td></td>
 				<td><b>Por :{{l.descripcion}}</b></td>
 				<td></td>
 				<td></td>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td></td>
+				<td class="ad"><b>Total</b></td>
+				<td class="ad">${{totaldebe}}</td>
+				<td class="ad">${{totalhaber}}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -59,6 +60,9 @@
 	}
 	.listo{
 		color:  rgb(255, 255, 255);
+	}
+	.ad{
+		text-align:right
 	}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>

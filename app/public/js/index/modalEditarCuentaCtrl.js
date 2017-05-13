@@ -19,30 +19,16 @@ angular.module('App')
     $scope.update = function(){
         console.log("datos actualizar", $scope.cuenta);
         console.log("datos actualizar", $scope.cuenta._id);
-        
-        $http.delete('/cuenta/eliminar/'+ $scope.cuenta._id).success(function (res) {
-            
-            if(res.estado == 1){
-
-                    $http.put('/cuenta/editar/' + $scope.cuenta._id, $scope.cuenta).success(function(data) {
-                        if (data.estado == 0) {
-                            alertify.success(data.mensaje);
-                            $uibModalInstance.close();
-                        }else{
-                            alertify.error(data.mensaje);
-                        }
-                    });
+       
+        $http.put('/cuenta/editar/' + $scope.cuenta._id, $scope.cuenta).success(function(data) {
+            if (data.estado == 0) {
+                alertify.success(data.mensaje);
+                $uibModalInstance.close();
             }else{
-                $http.post('/cuenta/register', $scope.cuenta).success(function (data) {  
-                    if (data.estado == 0) {
-                        alertify.success(data.mensaje);
-                        $uibModalInstance.close();
-                    }else{
-                        alertify.error(data.mensaje);
-                    }
-                });
+                alertify.error(data.mensaje);
             }
         });
+
             
     };
 

@@ -16,18 +16,6 @@ angular.module('App')
 
 	codigoCuentas();
 
-	$scope.save = function () {
-		var datos = $scope.dato;
-		$http.post('/cuenta/register', datos).success(function (data) {
-			codigoCuentas();
-			if (data.estado == 0) {
-				alertify.success(data.mensaje);
-			}else{
-				alertify.error(data.mensaje);
-			}
-		});
-	};
-
 
 	
 	$scope.openeditar = function (data) {
@@ -44,6 +32,21 @@ angular.module('App')
       		ariaDescribedBy: 'modal-body',
         	templateUrl: 'views/index/modalEditarCuentaEstudiante.html',
         	controller: "modalEditarCuentaCtrl",
+        	size: "sm",
+    	});
+
+        modalInstance.result.then(function () {
+        	codigoCuentas();	
+        });
+	};
+
+	$scope.opencuenta = function () {
+    	var modalInstance = $uibModal.open({
+        	animation: $scope.animationsEnabled,
+        	ariaLabelledBy: 'modal-title',
+      		ariaDescribedBy: 'modal-body',
+        	templateUrl: 'views/index/modalopenCuenta.html',
+        	controller: "modalopenCuentaCtrl",
         	size: "sm",
     	});
 

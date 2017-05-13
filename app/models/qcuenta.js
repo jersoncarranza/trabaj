@@ -11,7 +11,7 @@ exports.getallcuentas = function (callback) {
 		nombrecuenta:1,
 		codigocuenta:1
 	};
-	models.Cuenta.find(query, campos, callback).sort({codigocuenta:-1});
+	models.Cuenta.find(query, campos, callback).sort({codigocuenta:1});
 };
 //buscar por id 
 exports.getidcuenta = function (id, callback) {
@@ -21,6 +21,18 @@ exports.getidcuenta = function (id, callback) {
 		codigocuenta:1
 	}
 	models.Cuenta.findOne(query, campos, callback);
+};
+//buscar por id 
+exports.getalltipocuenta = function (id, callback) {
+	var query= {
+		//codigocuenta:{$regex:id}
+		codigocuenta:id
+	};
+	var campos={
+		nombrecuenta:1,
+		codigocuenta:1
+	};
+	models.Cuenta.find(query, campos, callback);
 };
 
 exports.removecuenta = function (id, callback) {

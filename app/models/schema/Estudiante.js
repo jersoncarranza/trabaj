@@ -12,7 +12,13 @@ var EstudianteSchema = mongoose.Schema({
 		id_curso:{type: String ,default: "0"}, 
 		nombre_curso:{type: String ,default: "none" },
 		precio_curso:{type: String ,default: "0" },
-		estado:{type: String, default: "0"}
+		estado:{type: String, default: "0"},
+		pagos:[{
+			mes:{type: Number ,default: 0 },
+			cantidad:{type: Number ,default: 0 },
+			tipo:{type:String, default: "efectivo"},
+			fecha:{type: Date, default: Date.now }
+		}]
 	}],
 	imagen:{type:String, default:"./img/user.png"}
 
