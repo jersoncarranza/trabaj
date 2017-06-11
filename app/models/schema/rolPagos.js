@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 
 var rolPagosSchema = mongoose.Schema({
 	date: {type: Date, default: Date.now },
+	//mes: {$month: "$date" },
+	//day: { $dayOfMonth: "$date" },
 	cargo:{type: String },
 	cedula:{type: String },
 	comision:{type:Number},

@@ -10,6 +10,9 @@ router.get('/estudiante/list/:id', estudianteController.listId);
 router.get('/estudiante/listcedula/:id',estudianteController.listCedula);
 //Añadir un estudiante
 router.post('/estudiante/register', estudianteController.new);
+//añadir admin
+router.post('/estudiante/registeradmin', estudianteController.newadmin);
+
 //eliminar un estudiante por su id
 router.delete('/estudiante/remove/:id', estudianteController.removeEstudiante);
 //actualizar un estudiante
@@ -28,7 +31,9 @@ router.get('/estudiante/reportes/:curso', estudianteController.reportesestudiant
 router.get('/estudiante/reportes/', estudianteController.reportesestudiantes2);
 //listar estudiates con prematrícula
 router.get('/estudiates/prematricula/', estudianteController.estudiateprematricula);
-//pensiones
+//contar estudia◙tes por  cada curso
+router.get('/estudiantes/contar/', estudianteController.contarEstudiantes);
+
 
 router.get('/pensiones/materia/',estudianteController.materia);
 

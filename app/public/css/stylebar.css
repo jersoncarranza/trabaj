@@ -11,6 +11,7 @@
     transition:  left 0.4s ease-in-out;
 }
 .container.open-sidebar {
+    margin-top: -1em;
     left: 150px;
 }
 
@@ -45,8 +46,8 @@ top: 0;
     background-color: #2290c9;
 }
 #sidebar ul li a {
-    padding: 15px 20px;
-    font-size: 16px;
+    padding: 12px 16px;
+    font-size: 12px;
     font-weight: 100;
     color: white;
     text-decoration: none;

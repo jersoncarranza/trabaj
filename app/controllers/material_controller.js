@@ -50,13 +50,16 @@ exports.listarId = function (req, res ,next) {
 
 	});
 };
-//Editar
+//Editar//comprar
 exports.editarId = function (req, res ,next) {
 	var id   = req.params.id;
 	var data = req.body;
 	var cuenta = req.body.pago.id;
+	//compras
+
+	data.ncompras= data.ncompras + data.ncantidad;
+	data.compras = data.compras+(data.ncantidad*data.costo);
 	console.log(data);
-	
 	var asiento ={ //datos para el libro diario
 		//fecha: data.fecha_matricula,
 		descripcion:"adquisición de " +data.nombre,
@@ -72,7 +75,7 @@ exports.editarId = function (req, res ,next) {
 			}],
 		sugerencia:"adquisición materiales",
 	};
-
+	
 	libroDiario.createAsiento(asiento, function(err,docl){
 		if (!err) {
 			data_res ={	estado:"0" 	}
@@ -81,10 +84,11 @@ exports.editarId = function (req, res ,next) {
 		}
 	});
 	
-
 	materialQuery.editarMaterial(id, data, function (err, doc) {
 		res.json(doc);
 	});
+	
+	
 };
 
 //vender 
@@ -92,8 +96,10 @@ exports.venta = function (req, res ,next) {
 	var id   = req.params.id;
 	var data = req.body;
 	var cuenta = "1.1.1.1";
-	var cantidad =data.cantidad - data.cantidadcomprar;
-
+	data.nventas= data.nventas+data.cantidadcomprar;
+	data.ventas = data.ventas+ (data.cantidadcomprar*data.precio);
+	data.cantidad= data.cantidad - data.cantidadcomprar;
+	console.log(data);
 	
 	var asiento ={ //datos para el libro diario
 		//fecha: data.fecha_matricula,
@@ -110,7 +116,7 @@ exports.venta = function (req, res ,next) {
 			}],
 		sugerencia:"venta materiales",
 	};
-
+	
 	libroDiario.createAsiento(asiento, function(err,docl){
 		if (!err) {
 			data_res ={	estado:"0" 	}
@@ -120,9 +126,10 @@ exports.venta = function (req, res ,next) {
 	});
 	
 
-	materialQuery.ventaMaterial(id,cantidad,function(err,doc){
+	materialQuery.ventaMaterial(id,data,function(err,doc){
 		res.json(doc);
 	});
-
-
+	
+	
+	
 };

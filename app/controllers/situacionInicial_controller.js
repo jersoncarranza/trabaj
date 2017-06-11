@@ -121,7 +121,8 @@ function esiLibroDiario(id, data) {
 		esi:id,
 		descripcion:"Estado de situación inicial",
 		debe :debe,
-		haber:haber
+		haber:haber,
+		sugerencia:"Estado de situación inicial"
 	}
 
 	libroDiarioQuery.editESI(id, asientoLibroDiario, function (err, doc) {
@@ -162,7 +163,8 @@ function esiNuevoLibroDiario(id, data) {
 		esi:id,
 		descripcion:"Estado de situación inicial",
 		debe :debe,
-		haber:haber
+		haber:haber,
+		sugerencia:"Estado de situación inicial"
 	}
 
 	libroDiarioQuery.createAsiento(asientoLibroDiario, function (err, doc) {

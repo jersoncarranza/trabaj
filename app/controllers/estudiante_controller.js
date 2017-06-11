@@ -1,6 +1,7 @@
 var EstudianteQuery 	= require("../models/qestudiante.js");
 var request				= require('request');
 var libroDiario     = require("../models/qLibroDiario");
+var curso     = require("../models/qcurso");
 //crear un nuevo estudiante
 exports.new = function (req, res, next){
 	var data_aux = req.body;
@@ -49,6 +50,50 @@ exports.new = function (req, res, next){
 		}//primer if
 	});
 };
+
+//crear un nuevo estudiante
+exports.newadmin = function (req, res, next){
+	var data_aux = req.body;
+	var cedula = req.body.cedula;
+	var data_res; //respuesta
+	var data = {
+		cedula: req.body.cedula,
+		nombres: req.body.nombres,
+		apellido1: req.body.apellido1,//Apellido Paterno
+		apellido2: req.body.apellido2,//Apellido Materno
+		sexo: req.body.sexo,
+		auxiliar:req.body.auxiliar
+	}
+
+	EstudianteQuery.FindOneEstudianteCedula(cedula, function (err, doc) {
+		if(!err){//primer if
+			if (doc === null) {//si el estudiante no existe ===> Lo guardamos
+				EstudianteQuery.createEstudiante(data, function (err, docs) {
+					if (!err) {
+						data_res={
+							estado:0,
+							mensaje: "correctamente ingresado"
+						}
+						res.json(data_res);
+					}else{
+						data_res={
+							estado:1,
+							mensaje: "Error"
+						}
+						res.json(data_res);
+					}
+				});
+			}else{
+			data_res={
+					estado:2,
+					mensaje: "Ya esta ingresado"
+				}
+				res.json(data_res);
+			}
+		}//primer if
+	});
+};
+
 
 // listar todos los estudiante
 exports.list = function(req, res, next){
@@ -367,7 +412,6 @@ exports.listcursosestudiantes = function (req, res) {
 		}
 	});
 };
-
 //actualizar  un estudiante
 exports.reportesestudiantes = function (req, res, next) {
 	var data_res;
@@ -555,3 +599,57 @@ exports.pagos = function (req, res, next) {
 	}
 	//=============END Libro diario
 }
+//contar estudiantes
+exports.contarEstudiantes=function(req,res){
+	var aux;
+	var doc;
+	var respuesta=[];
+	var contar=[];
+	curso.getallCurso(function (err,curso) {
+		doc=curso;
+
+
+			EstudianteQuery.contarEstudiantes(function(err,est){
+	
+			for (var k = 0; k < doc.length; k++) {
+				//console.log("nombre",doc[k].nombre);
+				aux=doc[k]._id;
+				var a=0;
+				var mensual=0;
+				var matricula=0;
+					for (var i = 0; i < est.length; i++) {		
+
+						for (var j = 0; j < est[i].cursos.length; j++) {
+
+							if (est[i].cursos[j].id_curso == doc[k]._id) {
+								a=a+1;//contador estudiante
+
+								//sumar la matricula
+								var precio=est[i].cursos[j].precio_curso;
+								matricula=matricula+parseInt(precio);
+								//sumar los pagos
+								for (var l = 0; l < est[i].cursos[j].pagos.length; l++) {
+									mensual=mensual+est[i].cursos[j].pagos[l].cantidad;
+								}
+							}
+
+						}
+
+					}
+					//console.log(mensual);
+					respuesta.push({
+						id:doc[k]._id,
+						label:doc[k].nombre,
+						value:a,
+						mensual:mensual,
+						matricula:matricula
+					})
+				}//
+			//console.log("la1",respuesta);
+			res.json(respuesta);
+			});
+		
+	
+	});//
+	
+};

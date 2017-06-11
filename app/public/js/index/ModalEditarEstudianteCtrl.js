@@ -10,6 +10,7 @@ angular.module('App')
     function GetIdEstudiante() {
         $http.get('/estudiante/list/'+ id).success(function (data, status, headers, config) {
             $scope.estudiante = data;
+            console.log(data.sexo);
             if(data.sexo == "Mujer"){
                 document.getElementById('radio2').checked = true;
             }
@@ -29,10 +30,13 @@ angular.module('App')
 
     //boton actualizar estudiante
     $scope.update = function(){
-        var sexo = radiobuton();
+
+        var sexo;
+        if (document.getElementById("radio2").checked == true){ sexo = "Mujer"; } 
+        if (document.getElementById("radio3").checked == true){ sexo = "Hombre";}
+        
         $scope.estudiante.sexo = sexo;
         $http.put('/estudiante/update/' + $scope.estudiante.id, $scope.estudiante).success(function(data) {
-            
             if (data.estado == 0) {
                 alertify.success(data.mensaje);
                 $uibModalInstance.close();

@@ -58,5 +58,19 @@ angular.module('App')
 
 	GetFundacion();
 
+	$scope.reporte = function () {
+		pdf();
+	}
+
+	function pdf() {
+		$http.get('fundacion/getall').success(function (data, status, headers, config) {
+            var json = data;
+
+			var doc = new jsPDF();
+			doc.text(20, 20 ,  json.somos);
+			doc.save('reporte');
+        });
+	}
+
 }]);
 

@@ -85,6 +85,41 @@ angular
 				controller: 'arriendoCtrl',
 				controllerAs: 'arriendo'
 			})
+			.when('/flujocaja', {
+				templateUrl: '../views/index/flujoCaja.html',
+				controller: 'flujoCajaCtrl',
+				controllerAs: 'flujoCaja'
+			})
+			.when('/balance', {
+				templateUrl: '../views/index/balanceComprobacion.html',
+				controller: 'balanceComprobacionCtrl',
+				controllerAs: 'balanceComprobacion'
+			})
+			.when('/graficos', {
+				templateUrl: '../views/index/graficos.html',
+				controller: 'graficosCtrl',
+				controllerAs: 'graficos'
+			})
+			.when('/graficos/cursos', {
+				templateUrl: '../views/index/graficoscursos.html',
+				controller: 'graficoscursosCtrl',
+				controllerAs: 'gcursos'
+			})
+			.when('/graficos/cursosganancia', {
+				templateUrl: '../views/index/cursosganancia.html',
+				controller: 'cursosgananciaCtrl',
+				controllerAs: 'cursosganancia'
+			})
+			.when('/graficos/graficosmateriales', {
+				templateUrl: '../views/index/graficosmateriales.html',
+				controller: 'graficosmaterialesCtrl',
+				controllerAs: 'graficosmateriales'
+			})
+			.when('/graficos/graficosgastos', {
+				templateUrl: '../views/index/graficosgastos.html',
+				controller: 'graficosgastosCtrl',
+				controllerAs: 'graficosgastos'
+			})
 			.when('/:id', {
 				templateUrl: '../views/index/teacher-detail.html',
 				controller: 'teacher-detail',

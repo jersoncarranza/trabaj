@@ -23,10 +23,7 @@ exports.editarMaterial = function (id, data, callback) {
 };
 
 //
-exports.ventaMaterial = function(id, cantidad, callback){
+exports.ventaMaterial = function(id, data, callback){
 	var query  = {_id:id};
-	var campos = {
-		cantidad:cantidad
-	};
-	models.Material.update(query, campos, callback);	
+	models.Material.update(query, data, callback);	
 };

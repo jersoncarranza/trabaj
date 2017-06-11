@@ -1,0 +1,106 @@
+<section class="container">
+    <div class="panel panel-default"> 
+    <div class="panel-heading">Flujo de caja Mayo</div>
+
+	<table class="table" id="table-libro">
+		<thead>
+			<tr>
+				<th>Detalle</th>
+				<th>Mes</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><b>Ingresos</b> </td>
+				<td> <b>Mayo</b></td>
+			</tr>
+			<tr ng-repeat="c in ingresos">
+				<td>{{c.sugerencia | setDecimal:2}}</td>
+				<td>${{c.ingresos | setDecimal:2 }}</td>
+			</tr>
+			<tr>
+				<td><b>Total ingresos</b></td>
+				<td> <b>${{debeAbril | setDecimal:2}}</b></td>
+			</tr>
+			<tr>
+				<td></td>
+			</tr>
+			<tr>
+				<td> <b> Egresos</b></td>
+				<td></td>
+			</tr>
+			<tr ng-repeat="c in egresos">
+				<td>{{c.sugerencia | setDecimal:2}}</td>
+				<td>${{c.egresos | setDecimal:2}}</td>
+			</tr>
+			<tr>
+				<td><b>Total egresos</b></td>
+				<td><b>${{haberAbril | setDecimal:2}}</b></td>
+			</tr>
+			<tr>
+				<td>Saldo</td>
+				<td><b>${{debeAbril-haberAbril | setDecimal:2}}</b></td>
+			</tr>
+		</tbody>
+	</table>
+	
+
+	</div>
+</section>
+
+<section class="container">
+    <div class="panel panel-default"> 
+    <div class="panel-heading">Flujo de caja Junio </div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Detalle</th>
+				<th class="al">Mes</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><b>Ingresos</b> </td>
+				<td> <b>Junio</b></td>
+			</tr>
+			<tr ng-repeat="c in ingresosJunio">
+				<td>{{c.sugerencia | setDecimal:2}}</td>
+				<td>${{c.ingresos | setDecimal:2 }}</td>
+			</tr>
+			<tr>
+				<td><b>Total ingresos</b></td>
+				<td> <b>${{debeJunio | setDecimal:2}}</b></td>
+			</tr>
+			<tr>
+				<td></td>
+			</tr>
+			<tr>
+				<td> <b> Egresos</b></td>
+				<td></td>
+			</tr>
+			<tr ng-repeat="c in egresosJunio">
+				<td>{{c.sugerencia | setDecimal:2}}</td>
+				<td>${{c.egresos | setDecimal:2}}</td>
+			</tr>
+			<tr>
+				<td><b>Total egresos</b></td>
+				<td><b>${{haberJunio | setDecimal:2}}</b></td>
+			</tr>
+			<tr>
+				<td>Saldo</td>
+				<td><b>${{debeJunio-haberJunio | setDecimal:2}}</b></td>
+			</tr>
+			<tr>
+				<td>Saldo Acumulado</td>
+				<td><b>$${{(debeAbril-haberAbril)+ (debeJunio-haberJunio) | setDecimal:2}}</b></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</section>
+<style type="text/css">
+	.al{
+		margin-right: 2em;
+	}
+</style>

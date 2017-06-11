@@ -6,11 +6,11 @@ exports.createAsiento = function (asiento, callback) {
 	let chaber;
 	
 	for (var i = 0; i < asiento.debe.length; i++) {
-		cdebe = asiento.debe[i].cantidad + 0.00001;
-		asiento.debe[i].cantidad  = cdebe.toFixed(2);
+		cdebe = asiento.debe[i].cantidad;
+		asiento.debe[i].cantidad  = cdebe;
 	}
 
-	chaber = (asiento.haber.cantidad + 0.00001).toFixed(2);
+	chaber = (asiento.haber.cantidad);
 	asiento.haber.cantidad = chaber;
 	
 

@@ -492,5 +492,22 @@ angular.module('App')
         
     };
 
+    $scope.a = function () {
+        pdf();
+    }
+
+    function pdf() {
+        $http.get('fundacion/getall').success(function (data, status, headers, config) {
+            var json = data;
+
+            var doc = new jsPDF();
+             doc.setFontType("bolditalic");
+            doc.text(20, 80 ,  json.somos);
+            doc.setFontSize(20);
+            doc.save('reporte');
+        });
+    }
+
+
 }]);
 

@@ -33,20 +33,10 @@ angular.module('App')
             var factor = "1" + Array(+(places > 0 && places +1)).join("0");
              $scope.iess =  Math.round(input * factor) / factor;
     
-        })
-        .error(function (data, status, header, config) {
-            $scope.ResponseDetails = "Data: " + data +
-                "<br />status: " + status +
-                "<br />headers: " + jsonFilter(header) +
-                "<br />config: " + jsonFilter(config);
-        }); 
+        });
+       
 
-        var cuenta ="caja";
-        $http.get('/contabilidad/total/'+ cuenta).success(function (data, status, headers, config) {
-            $scope.debehaber = data;   
-          
-        })
-
+       
        
 
     };
@@ -76,34 +66,45 @@ angular.module('App')
 
         asignarvalor();
 
-        if ($scope.debehaber.debe >= (rol.sueldo + rol.comision)) {
+        var cuenta ="caja";
+        $http.get('/contabilidad/libromayor/'+ cuenta).success(function (resultado, status, headers, config) {
+            var sumadebe=0;
+            var sumahaber=0;
+
+            for (var i = 0; i < resultado.debe.length; i++) {
+                sumadebe = sumadebe +resultado.debe[i].cantidad;
+            }
+            for (var j = 0; j < resultado.haber.length; j++) {
+                sumahaber = sumahaber + resultado.haber[j].cantidad;
+            }
+
+            var saldo = sumadebe - sumahaber;
+          
+        
+
+
+        if (saldo >= (rol.sueldo + rol.comision)) {
             sueldocomision();
              rol.mes = mesConvertir(rol.mes);
         }else{
 
-            alertify.alert("Mensaje","Fondos insuficientes, caja tiene "+"$"+$scope.debehaber.debe, function(){
+            alertify.alert("Mensaje","Fondos insuficientes, caja tiene "+"$"+saldo, function(){
                 alertify.message('OK');
             });
 
         }
+
+        });
   
     }
 
     //validación si la comisión es mayor al 20% del sueldo,  pasa a formar parte del sueldo
     function sueldocomision() {
-         
-        
         var porcentaje = (rol.comision/ rol.sueldo)*100;
-
         if (porcentaje > 20) {//reasignacion de valores     
-            
-             alertify.alert("Mensaje","Las comisiones superan el 20% con respecto al sueldo, se actualizará los nuevos datos. Pon guardar si estas de acuerdo con los nuevos valores", function () {
-              
+                alertify.alert("Mensaje","Las comisiones superan el 20% con respecto al sueldo, se actualizará los nuevos datos. Pon guardar si estas de acuerdo con los nuevos valores", function () {
             });
-           
             cambiarValores();
-            
-
         }else{   
             $http.post('/roldepagos/guardar/', rol).success(function (data, status, headers, config) {
                 $scope.respuesta = data;

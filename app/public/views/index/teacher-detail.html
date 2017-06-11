@@ -1,17 +1,6 @@
-	<section class="container">
-		<div class="col-xs-8 col-sm-10">
-			<h3 class="text-primary text-capitalize">{{p.apellido}} {{p.nombre}}</h3>
-			<img ng-src="{{p.imagen}}" width="100">
-		</div>
-		<div class="borde-num col-xs-2 col-sm-2 animate-if" ng-if="rate">
-			<div class="img-circle display-num" >
-		        <span class="text-center">{{ datos.promedio }}</span>
-		    </div>
-		     <h4 class="text-primary text-capitalize">promedio</h4>
-		</div>
-	</section>
+
 	<section id="calificacion" class="container">
-	    <h4>De su calificación al profesor del 1 al 10</h4>
+	    <h4>De un raking a la aplicación del 1 al 10</h4>
 	    <span style='font-size:2em;' onclick="ocultar()" class="color-estr" uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating" ng-click="enviar()" ng-init="rate=false"  ></span>
 	   
 	    <span class="label" ng-class="{'label-danger': percent<3, 'label-warning': percent>=3 && percent<7, 'label-success': percent>=7}" ng-show="overStar && !isReadonly" >{{percent}}</span>

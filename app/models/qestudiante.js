@@ -177,8 +177,18 @@ exports.listcursosestudiantes = function (curso, callback) {
 	};
 	models.Estudiante.find(query, campos, callback);
 };
+//===================contar estudiante============000
 
-//estudiantes prematriculado
+exports.contarEstudiantes = function (callback) {
+	var query = {"cursos.estado":"1"};
+	var campos = {
+		cursos:1
+	};
+	//var query = {		 	"cursos":{estado: "1", id_curso:curso}};
+
+	models.Estudiante.find(query,campos ,callback);
+};
+//=================================================
 //estudiantes matriculado
 exports.estudiateprematricula = function (callback) {
 	var query = {

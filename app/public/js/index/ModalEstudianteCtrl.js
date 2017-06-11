@@ -8,13 +8,18 @@ angular.module('App')
 		//Guardar
 		$scope.Save = function() {
 			
+			var sexo;
+			if (document.getElementById("radio2").checked == true){	sexo = "Mujer";	} 
+			if (document.getElementById("radio3").checked == true){	sexo = "Hombre";}
+			
 			$scope.estudiante.sexo = sexo;
 			var cedula = $scope.estudiante.cedula;
 			$scope.estudiante.auxiliar = $scope.estudiante.cedula;
 			var validatecedula = check_cedula(cedula);
+			console.log($scope.estudiante);
 			
 			if(validatecedula === true){
-					$http.post('/estudiante/register', $scope.estudiante ).success(function(data) {
+					$http.post('/estudiante/registeradmin', $scope.estudiante ).success(function(data) {
 							if (data.estado === 0) {
 								alertify.success(data.mensaje);
 							}else{
@@ -27,6 +32,7 @@ angular.module('App')
 					});
 			 $uibModalInstance.close();
 			}
+			
 				
 			 // document.getElementById({{$scope.contact.id}}).style.display = 'none';	
 		};
@@ -36,18 +42,14 @@ angular.module('App')
 		$uibModalInstance.dismiss('cancel');
 	};
 
-		//radio buton
-		function radiobuton(){
-				var sexo;
-				if (document.getElementById("radio2").checked == true){
-								sexo = "Mujer";
-						} 
-				
-				if (document.getElementById("radio3").checked == true){
-								sexo = "Hombre";
-				}
-				return sexo;
-		}
+	//radio buton
+	function radiobuton(){
+			var sexo;
+			if (document.getElementById("radio2").checked == true){	sexo = "Mujer";	} 
+			
+			if (document.getElementById("radio3").checked == true){	sexo = "Hombre";}
+			return sexo;
+	}
 		
 	//función validar cedula
 	 function check_cedula( cedula_aux )
