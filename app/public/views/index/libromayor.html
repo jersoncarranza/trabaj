@@ -32,7 +32,7 @@
 	        </thead>
 	        <tbody>
 	            <tr ng-repeat="c in debe">
-	                <td>{{c.fecha}}</td><td > $ {{c.cantidad}}</td>
+	                <td>{{c.fecha}}</td><td > $ {{c.cantidad  | setDecimal:2 }}</td>
 	            </tr>   
 	        </tbody>
 	    </table>
@@ -46,7 +46,7 @@
 	        </thead>
 	        <tbody>    
 	            <tr ng-repeat="c in haber">
-	                <td>{{c.fecha}}</td><td>$ {{c.cantidad}}</td>
+	                <td>{{c.fecha}}</td><td>$ {{c.cantidad  | setDecimal:2}}</td>
 	            </tr>  
 	          
 	        </tbody>
@@ -58,7 +58,7 @@
 	        <thead>
 	            <tr>
 	                <th><b>Total</b></th>
-	                <th><b>$ {{sumadebe}}</b></th>
+	                <th><b>$ {{sumadebe  | setDecimal:2  }}</b></th>
 	            </tr>
 	        </thead>
 	    </table>
@@ -67,7 +67,7 @@
 	        <thead>
 	            <tr>
 	                <th><b>Total</b></th>
-	                <th><b>$ {{sumahaber}}</b></th>
+	                <th><b>$ {{sumahaber  | setDecimal:2}}</b></th>
 	            </tr>
 	        </thead>
 	    </table>

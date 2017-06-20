@@ -71,8 +71,8 @@ exports.new = function (req, res, next){
 						}
 						],
 					haber:{
-						codigo_cuenta:"2.1.4.01",
-						detalle:"servicios cobrados por anticipado",
+						codigo_cuenta:"4.1",
+						detalle:"cobro de matrícula",
 						cantidad: numero 
 					},
 					sugerencia:"Matricúla",
@@ -148,8 +148,8 @@ exports.new = function (req, res, next){
 						*/
 						],
 					haber:{
-						codigo_cuenta:"2.1.4.01",
-						detalle:"servicios cobrados por anticipado",
+						codigo_cuenta:"4.1",
+						detalle:"cobro de matrícula",
 						cantidad: numero 
 					},
 					sugerencia:"Matricúla",

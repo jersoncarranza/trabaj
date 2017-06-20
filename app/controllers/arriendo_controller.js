@@ -13,7 +13,7 @@ exports.new = function (req, res, next) {
 					//fecha: data.fecha_matricula,
 					descripcion:"Pago de arriendo mes de " + data.meses,
 					debe:[{
-						codigo_cuenta:"2.3.2.2",
+						codigo_cuenta:"5.1",
 						detalle:"pago arriendo",
 						cantidad: data.cantidad 
 						}],
