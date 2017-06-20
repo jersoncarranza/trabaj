@@ -85,3 +85,36 @@ exports.buscarCuenta = function (cuenta, callback) {
 	}
 	modelsLibroDiario.LibroDiario.find(query, campos, callback).sort({fecha:1});
 };
+
+
+
+/*
+exports.buscarCuentaFecha = function (cuenta,fecha, callback) {
+	
+	var query = {
+		$and:[
+				{
+				$or:[
+					{"debe.detalle":cuenta},
+					{"debe.codigo_cuenta":cuenta},
+					{"haber.detalle":cuenta},
+					{"haber.codigo_cuenta":cuenta},
+					]
+				},
+				{
+					fecha:{ 	$gte:"2017-09-01T00:00:00.000Z", 	$lt: "2017-10-01T00:00:00.000Z"	}
+				}
+			]
+		}
+	var campos = {
+		fecha:1,
+		"debe.detalle":1,
+		"debe.cantidad":1,
+		"debe.codigo_cuenta":1,
+		"haber.detalle":1,
+		"haber.cantidad":1,
+		"haber.codigo_cuenta":1,
+	}
+	modelsLibroDiario.LibroDiario.find(query, campos, callback).sort({fecha:1});
+};
+*/

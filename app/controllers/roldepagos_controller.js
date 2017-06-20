@@ -23,11 +23,11 @@ exports.guardar = function (req, res, next) {
 					var asiento = {
 						sugerencia:"pagos de sueldos",
 						debe:[{
-							codigo_cuenta:"4.1.1",
+							codigo_cuenta:"5.2",
 							detalle:"sueldos y salarios",
 							cantidad: data.sueldo - data.iesstrabajador, 
 						},{
-							codigo_cuenta:"4.1.2",
+							codigo_cuenta:"5.3",
 							detalle:"aporte iess",
 							cantidad: data.iesstrabajador
 						}],
@@ -46,7 +46,7 @@ exports.guardar = function (req, res, next) {
 					asiento = {
 						sugerencia:"Aporte Patrono",
 						debe:[{
-							codigo_cuenta:"4.1.3",
+							codigo_cuenta:"5.4",
 							detalle:"aporte iess patrono",
 							cantidad: data.iesspatrono, 
 						}],
@@ -58,6 +58,7 @@ exports.guardar = function (req, res, next) {
 						descripcion:"Aporte" + data.cedula,
 
 					}
+					var hoy = new Date();
 					libroDiario.createAsiento(asiento, function (errp, docp) {});
 					//<-----------Patrono----------->//
 

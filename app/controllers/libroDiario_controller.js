@@ -59,6 +59,8 @@ exports.cuenta = function (req, res, next) {
 		}
 	});
 };
+//buscar cuenta fecha
+
 
 exports.mayor = function (req, res, next) {
 	var cuenta = req.params.cuenta;

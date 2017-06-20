@@ -8,7 +8,7 @@ var router = express.Router();
 var userController = require('../controllers/user_controller.js');
 
 	
-	router.get('/register', ensureAuthenticated, function (req, res) {
+	router.get('/register', function (req, res) {
 		res.render('index');
 	});
 

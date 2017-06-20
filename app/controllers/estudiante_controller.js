@@ -583,7 +583,7 @@ exports.pagos = function (req, res, next) {
 					}
 					],
 				haber:{
-					codigo_cuenta:"2.1.4.1",
+					codigo_cuenta:"4.2",
 					detalle:"Cobro de pensión",
 					cantidad: numero 
 				},

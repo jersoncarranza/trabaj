@@ -18,23 +18,29 @@
    		<table class="space table table-hover col-sm-6">
             <thead>
                 <tr>
-                    <th><b>ACTIVO</b></th>
+                    <th><b><u>ACTIVO</u> </b></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="n in esi.activo">
+                <tr><td><p><b><small>Activo corriente</small></b></p></td></tr>
+                <tr ng-repeat="n in ac">
                     <td>{{n.cuenta}}</td> <td class="float-right">${{n.cantidad}}</td>
                 </tr>        
+                <tr><td><p><b><small>Activo no corriente</small></b></p></td></tr>
+                <tr ng-repeat="n in anc">
+                    <td>{{n.cuenta}}</td> <td class="float-right">${{n.cantidad}}</td>
+                </tr>
             </tbody>
         </table>
 
         <table class="space table table-hover col-sm-6">
             <thead>
                 <tr>
-                    <th><b>Pasivo</b></th>
+                    <th><b><u>Pasivo</u> </b></th>
                 </tr>
             </thead>
             <tbody>
+                <tr><td><p><b><small>Pasivo no corriente</small></b></p></td></tr>
                 <tr ng-repeat="n in esi.pasivo"><td>{{n.cuenta}}</td> <td class="float-right">${{n.cantidad}}</td></tr> 
                 <tr><td>Total Pasivos</td><td class="float-right">${{spasivo}}</td></tr>    
             </tbody>
@@ -42,7 +48,7 @@
             <thead >
             
                 <tr>
-                    <th><b>Patrimonio</b></th>
+                    <th><b> <u>Patrimonio</u> </b></th>
                 </tr>
             </thead>
             <tbody>

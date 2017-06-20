@@ -25,11 +25,34 @@ angular.module('App')
     function getSituacionInicial() {
         $http.get('/contabilidad/situacioninicial/list' ).success(function (data) {
             $scope.esi = data;
+            $scope.anc =[];
+            $scope.ac  =[];
+            //
 
+            for (var i = 0; i < $scope.esi.activo.length; i++) {  
+                
+                //activo no corriente
+
+                if ($scope.esi.activo[i].codigoCuenta.substr(0,3) =="1.2") {
+                    $scope.anc.push($scope.esi.activo[i]);   
+                }
+                //activo corriente
+                if ($scope.esi.activo[i].codigoCuenta.substr(0,3) =="1.1") {
+                    $scope.ac.push($scope.esi.activo[i]); 
+                }
+            }
+      
+
+
+
+
+
+            //sumatoria
             $scope.sactivo=0;
             for (var i = 0; i < data.activo.length; i++) {
                 $scope.sactivo = $scope.sactivo + data.activo[i].cantidad;
             }
+        
 
             $scope.spasivo=0;
             for (var i = 0; i < data.pasivo.length; i++) {
